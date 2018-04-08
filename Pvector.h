@@ -19,40 +19,61 @@ public:
     //Constructors
     Pvector() {}
 
-    Pvector(float xComp, float yComp)
+    Pvector(float xComp, float yComp, float zComp)
     {
         x = xComp;
         y = yComp;
+        z = zComp;
     }
 
+
     //Mutator Functions
-    void set(float x, float y);
 
     //Scalar functions scale a vector by a float
-    void addVector(Pvector v);
-    void addScalar(float x);
+    Pvector operator +(Pvector &v){
+        return Pvector(x+v.x,y+v.y,z+v.z);
+    }
+    Pvector operator +(float f){
+        return Pvector(x+f,y+f,z+f);
+    }
 
-    void subVector(Pvector v);
-    Pvector subTwoVector(Pvector v, Pvector v2);
-    void subScalar(float x);
+    Pvector operator -(Pvector v){
+        return Pvector(x-v.x,y-v.y,z-v.z);
+    }
+    //Pvector subTwoVector(Pvector v, Pvector v2);
+    //void subScalar(float x)
 
-    void mulVector(Pvector v);
-    void mulScalar(float x);
-
-    void divVector(Pvector v);
-    void divScalar(float x);
-
-    void limit(double max);
-
+    float operator *(Pvector v){
+        return x*v.x+y*v.y+z*v.z;
+    }
+    Pvector operator *(float f){
+        return Pvector(x*f,y*f,z*f);
+    }
+    //void divVector(Pvector v);
+    Pvector operator /(float f){
+        return Pvector(x/f,y/f,z/f);
+    }
+    float abs(){
+        return sqrt(x*x+y*y+z*z);
+    }
+    void normalize(){
+        x/=abs();
+        y/=abs();
+        z/=abs();
+    }
+    void logistic_limit(float max){
+        x=tanh(x);
+        y=tanh(y);
+        z=tanh(z);
+    }
     //Calculating Functions
-    float distance(Pvector v);
-    float dotProduct(Pvector v);
-    float magnitude();
-    void setMagnitude(float x);
-    float angleBetween(Pvector v);
-    void normalize();
+    static float distance(Pvector v1, Pvector v2){
+        return abs(v1-v2);
+    }
 
-    Pvector copy(Pvector v);
+    static float angle(Pvector v1, Pvector v2){
+        return acos((v1*v2)/(abs(v1)*abs(v2)));
+    }
 };
 
 #endif
