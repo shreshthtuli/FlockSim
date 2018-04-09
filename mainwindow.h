@@ -14,7 +14,7 @@ class QSlider;
 class QPushButton;
 QT_END_NAMESPACE
 
-class MyGLWidget;
+class Flock;
 
 class MainWindow : public QMainWindow
 {
