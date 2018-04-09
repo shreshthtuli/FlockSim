@@ -1,10 +1,27 @@
 #include "Boid.h"
 #include "Flock.h"
+#include <QtWidgets>
+#include <QtOpenGL>
 
 #define tth_side 0.1
 // =============================================== //
 // ======== Flock Functions from Flock.h ========= //
 // =============================================== //
+
+
+Flock::Flock(QWidget *parent)
+    : QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
+{
+    xRot = 0;
+    yRot = 0;
+    zRot = 0;
+    zoomfactor = 1.00;
+}
+
+Flock::~Flock()
+{
+}
+
 
 int Flock::getSize()
 {
@@ -46,6 +63,42 @@ static void qNormalizeAngle(int &angle)
         angle += 360 * 16;
     while (angle > 360)
         angle -= 360 * 16;
+}
+
+void Flock::setXRotation(int angle)
+{
+    qNormalizeAngle(angle);
+    if (angle != xRot) {
+        xRot = angle;
+        emit xRotationChanged(angle);
+        updateGL();
+    }
+}
+
+void Flock::setYRotation(int angle)
+{
+    qNormalizeAngle(angle);
+    if (angle != yRot) {
+        yRot = angle;
+        emit yRotationChanged(angle);
+        updateGL();
+    }
+}
+
+void Flock::setZRotation(int angle)
+{
+    qNormalizeAngle(angle);
+    if (angle != zRot) {
+        zRot = angle;
+        emit zRotationChanged(angle);
+        updateGL();
+    }
+}
+
+void Flock::setzoom(int zoomval)
+{
+    zoomfactor = zoomval/100.0f;
+    updateGL();
 }
 
 void Flock::initializeGL()
@@ -98,26 +151,27 @@ void Flock::resizeGL(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-void Flock::mousePressEvent(QMouseEvent *event){}
-//{
-//    lastPos = event->pos();
-//}
+void Flock::mousePressEvent(QMouseEvent *event)
+{
+    lastPos = event->pos();
+}
 
-void Flock::mouseMoveEvent(QMouseEvent *event){}
-//{
-//    int dx = event->x() - lastPos.x();
-//    int dy = event->y() - lastPos.y();
+void Flock::mouseMoveEvent(QMouseEvent *event)
+{
+    int dx = event->x() - lastPos.x();
+    int dy = event->y() - lastPos.y();
 
-//    if (event->buttons() & Qt::LeftButton) {
-//        setXRotation((xRot + dy)%360);
-//        setYRotation((yRot + dx)%360);
-//    } else if (event->buttons() & Qt::RightButton) {
-//        setXRotation((xRot + dy)%360);
-//        setZRotation((zRot + dx)%360);
-//    }
+    if (event->buttons() & Qt::LeftButton) {
+        setXRotation((xRot + dy)%360);
+        setYRotation((yRot + dx)%360);
+    }
+    else if (event->buttons() & Qt::RightButton) {
+        setXRotation((xRot + dy)%360);
+        setZRotation((zRot + dx)%360);
+    }
 
-//    lastPos = event->pos();
-//}
+    lastPos = event->pos();
+}
 
 void Flock::draw()
 {
@@ -128,20 +182,20 @@ void Flock::draw()
 
     glBegin(GL_LINES);
         glColor3f( 1.0f, 0.0f, 0.0f );
-        glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(4, 0.0, 0.0);
+        glVertex3f(-0.25, 0.0, 0.0);
+        glVertex3f(0.25, 0.0, 0.0);
     glEnd();
 
     glBegin(GL_LINES);
         glColor3f( 0.0f, 1.0f, 0.0f );
-        glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(0.0, 4.0, 0.0);
+        glVertex3f(0.0, -0.25, 0.0);
+        glVertex3f(0.0, 0.25, 0.0);
     glEnd();
 
     glBegin(GL_LINES);
         glColor3f( 0.0f, 0.0f, 1.0f );
-        glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(0.0, 0.0, 4.0);
+        glVertex3f(0.0, 0.0, -0.25);
+        glVertex3f(0.0, 0.0, 0.25);
     glEnd();
 
     //Flock

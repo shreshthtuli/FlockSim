@@ -15,24 +15,27 @@ class Flock : public QGLWidget
 {
     Q_OBJECT
 public:
+    explicit Flock(QWidget *parent = 0);
+    ~Flock();
     vector<Boid*> flock;
-    //Constructors
-    Flock(QWidget *parent): QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
-    {
-        xRot = 0;
-        yRot = 0;
-        zRot = 0;
-        zoomfactor = 1.00;
-    }
-
     // Accessor functions
     int getSize();
     Boid getBoid(int i);
     // Mutator Functions
     void flocking();
+    void setXRotation(int angle);
+    void setYRotation(int angle);
+    void setZRotation(int angle);
+    void setzoom(int zoomval);
 
 public slots:
     void addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb);
+
+signals:
+    // signaling rotation from mouse movement
+    void xRotationChanged(int angle);
+    void yRotationChanged(int angle);
+    void zRotationChanged(int angle);
 
 protected:
     void initializeGL();
