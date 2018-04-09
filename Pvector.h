@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ class Pvector {
 public:
     float x;
     float y;
+    float z;
 
     //Constructors
     Pvector() {}
@@ -30,7 +32,7 @@ public:
     //Mutator Functions
 
     //Scalar functions scale a vector by a float
-    Pvector operator +(Pvector &v){
+    Pvector operator +(Pvector v){
         return Pvector(x+v.x,y+v.y,z+v.z);
     }
     Pvector operator +(float f){
@@ -68,11 +70,11 @@ public:
     }
     //Calculating Functions
     static float distance(Pvector v1, Pvector v2){
-        return abs(v1-v2);
+        return (v1-v2).abs();
     }
 
     static float angle(Pvector v1, Pvector v2){
-        return acos((v1*v2)/(abs(v1)*abs(v2)));
+        return acos((v1*v2)/(v1.abs()*v2.abs()));
     }
 };
 

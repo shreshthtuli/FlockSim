@@ -51,27 +51,28 @@ public:
     /// \brief fov
     /// \details Maximum angle to which the bird can see. Maximum value is pi,but hugely unrealistic.
     float fov;
+    float wing_area;
     float power,energy;
     Pvector location;
     Pvector velocity;
     Pvector acceleration;
     Boid() {}
-    Boid(float x, float y,float z){
+    Boid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb){
         location=Pvector(x,y,z);
         power=0.0;
         energy=0.0;
-        strength=1.0;
-        adventurous=0;
-        sightedness=1;
+        strength=strength;
+        adventurous=adv;
+        sightedness=sightedness;
         csa=0.08;
         mass=0.075;
-        fov=4.0*M_PI/3;
+        fov=fova*M_PI/fovb;
         density=730.0;
 
     }
     //void applyForce(Pvector force);
     ///Internal forces felt by the birds. These are combined into one function to avoid having to loop over all the birds multiple times.
-    Pvector Internal(vector<*Boid> Boids, int self){
+    Pvector Internal(vector<Boid*> Boids, int self){
         int i=0;
         Boid *b;
         float distance, view_factor;
@@ -80,20 +81,20 @@ public:
         Pvector net_att(0,0,0);
         Pvector net_coh(0,0,0);
         while(i<Boids.size()){
-            if(i!=self && Pvector.angle(velocity,(Boids[i]->location)-location)){
+            if(i!=self && Pvector::angle(velocity,(Boids[i]->location)-location)){
                 b=Boids[i];
-                distance=Pvector.distance(b->location, location);
+                distance=Pvector::distance(b->location, location);
                 view_factor=exp(-sightedness*distance);
                 net_weight+=view_factor;
                 //separation
-                net_sep+=(location-b->location)*view_factor*sep_fact/(distance*distance*distance);
+                net_sep= net_sep+(location-b->location)*view_factor*sep_fact/(distance*distance*distance);
 
                 //alignment
-                net_att+=b->velocity*att_fact*view_factor;
+                net_att= net_sep+b->velocity*att_fact*view_factor;
 
                 //cohesion
                 //this force acts opposite to separation. therefore, it is important to make it rise slower, so that separation dominates at lesser distances while cohesion dominates at higher distances
-                net_coh+=(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance);
+                net_coh= net_coh+(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance);
             }
             i++;
         }
@@ -103,28 +104,28 @@ public:
     }
     ///Positional forces felt by the bird. While it is realistic that the birds would not want to touch the ground, we need hypotheticl boundaries on all sides. This is mostly a computational restriction. This is modelled as a maximally flat filter
     Pvector Positional(){
-        return (location/pow(1.5*position.abs()/soft_max_pos,21))*pos_push;
+        return (location/pow(1.5*location.abs()/soft_max_pos,21))*pos_push;
     }
 
     //Functions involving SFML and visualisation linking
     //Pvector seek(Pvector v);
-    void run(vector <Boid> v, int self){
+    void run(vector <Boid*> v, int self){
         //Model the external forces
         Pvector gravity(0,-9.81,0);
-        gravity*=(density-density_of_air)/density;      //correct for buoyancy
+        gravity= gravity*(density-density_of_air)/density;      //correct for buoyancy
         Pvector drag=(velocity/velocity.abs())*((velocity*velocity)*(-0.5)*density_of_air*drag_coeff*csa/mass);
-        Pvector Lift(0,(velocity.x*velocity.x+velocity.y*velocity.y)*density_of_air*0.5*wing_area*lift_coefficient,0);
+        Pvector Lift(0,(velocity.x*velocity.x+velocity.y*velocity.y)*density_of_air*0.5*wing_area*lift_coeff,0);
         Pvector acc_net=gravity+drag+Lift;
         Pvector new_vel=velocity+acceleration;
         Pvector desired_vel=Internal(v,self)+Positional();
         Pvector difference=desired_vel-new_vel;
         difference.logistic_limit(max_acc*strength);
-        new_vel+=difference;
+        new_vel=new_vel+difference;
         acceleration=new_vel-velocity;
-        velocity+=acceleration;
+        velocity=velocity+acceleration;
         power=velocity*difference*mass;
         energy+=power;
-        location+=velocity;
+        location=location+velocity;
     }
 };
 
