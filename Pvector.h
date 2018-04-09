@@ -61,7 +61,9 @@ public:
         return Pvector(x/f,y/f,z/f);
     }
     float abs(){
-        return sqrt(x*x+y*y+z*z);
+        float p=x*x+y*y+z*z;
+        p=sqrt(p);
+        return p;
     }
     void normalize(){
         x/=abs();
@@ -69,9 +71,9 @@ public:
         z/=abs();
     }
     void logistic_limit(float max){
-        x=tanh(x);
-        y=tanh(y);
-        z=tanh(z);
+        x=tanh(x/max)*max;
+        y=tanh(y/max)*max;
+        z=tanh(z/max)*max;
     }
     //Calculating Functions
     static float distance(Pvector v1, Pvector v2){

@@ -3,16 +3,16 @@
 #include <stdlib.h>
 #include <iostream>
 
-#define sep_fact 1.0
-#define att_fact 1.0
-#define coh_fact 0.001
+#define sep_fact -100000000.0
+#define att_fact 0.1
+#define coh_fact 0.01
 #define soft_max_pos 100.0
-#define pos_push 1.0
+#define pos_push -1000.0
 #define density_of_air 1.225
 #define drag_coeff 0.8
 #define lift_coeff 1.5
-#define max_acc 1.0
-#define noise 2.0
+#define max_acc 50.0
+#define noise 20.0
 
 #ifndef BOID_H_
 #define BOID_H_
@@ -58,12 +58,12 @@ public:
     Pvector velocity;
     Pvector acceleration;
     Boid() {}
-    Boid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb){
+    Boid(float x, float y, float z, float Istrength, float adv, float sightedness, int fova, int fovb){
         location=Pvector(x,y,z);
         power=0.0;
         energy=0.0;
-        strength=strength;
-        adventurous=adv;
+        strength=Istrength;
+        adventurous=adv*10;
         sightedness=sightedness;
         csa=0.08;
         mass=0.075;
@@ -92,7 +92,7 @@ public:
                 net_sep= net_sep+(location-b->location)*view_factor*sep_fact/(distance*distance*distance);
 
                 //alignment
-                net_att= net_sep+b->velocity*att_fact*view_factor;
+                net_att= net_att+b->velocity*att_fact*view_factor;
 
                 //cohesion
                 //this force acts opposite to separation. therefore, it is important to make it rise slower, so that separation dominates at lesser distances while cohesion dominates at higher distances
@@ -100,13 +100,14 @@ public:
             }
             i++;
         }
-
+        net_coh=net_coh*(1000-adventurous)/1000.0;
         //the forces need to be normalised and added. In this case, we choose not to normalise separation. Also, we add a random noise
-        return Pvector::Rnd_Vector(noise)+((net_weight>0)?net_sep+(net_att+net_coh)/net_weight:Pvector(0,0,0));
+        return Pvector::Rnd_Vector(noise)+((net_weight>0)?net_sep+(net_coh+net_att):Pvector(0,0,0));
     }
     ///Positional forces felt by the bird. While it is realistic that the birds would not want to touch the ground, we need hypotheticl boundaries on all sides. This is mostly a computational restriction. This is modelled as a maximally flat filter
     Pvector Positional(){
-        return (location.abs()/soft_max_pos>0.2)?(location/pow(1.5*location.abs()/soft_max_pos,21))*pos_push:Pvector(0,0,0);
+        float f=location.abs()/soft_max_pos;
+        return (f>5)?(location*(sqrt(f)-sqrt(5)))*pos_push:Pvector(0,0,0);
     }
 
     //Functions involving SFML and visualisation linking
@@ -122,12 +123,17 @@ public:
         Pvector desired_vel=Internal(v,self)+Positional();
         Pvector difference=desired_vel-new_vel;
         difference.logistic_limit(max_acc*strength);
+        //Pvector pos=Positional();
+        //pos.logistic_limit(2*max_acc);
         new_vel=new_vel+difference;
         acceleration=new_vel-velocity;
         velocity=velocity+acceleration;
-        power=velocity*difference*mass;
+        power=velocity*(difference)*mass;
         energy+=power;
-        location=location+velocity;
+        auto new_loc=location+velocity/10;
+        new_loc.logistic_limit(20*soft_max_pos);
+        velocity=(new_loc-location)*10;
+        location=new_loc;
     }
 };
 
