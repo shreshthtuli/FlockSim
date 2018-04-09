@@ -199,7 +199,7 @@ void Flock::draw()
     glEnd();
 
     //Flock
-    Flock::flocking();
+    //Flock::flocking();
 
     //3D object
     glColor3f( 0.8f, 0.8f, 0.8f );
@@ -238,16 +238,16 @@ void Flock::draw()
         glColor3f(1.0, 1.0, 1.0);
         glLineWidth(2.0);
         glBegin(GL_LINES);
-        glVertex3f(flock[i]->location.x+0.05f, flock[i]->location.y, flock[i]->location.z);
-        glVertex3f(flock[i]->location.x-0.05f, flock[i]->location.y, flock[i]->location.z);
+        glVertex3f(flock[i]->location.x/1000+0.05f, flock[i]->location.y/1000, flock[i]->location.z/1000);
+        glVertex3f(flock[i]->location.x/1000-0.05f, flock[i]->location.y/1000, flock[i]->location.z/1000);
         glEnd();
         glBegin(GL_LINES);
-        glVertex3f(flock[i]->location.x, flock[i]->location.y+0.05f, flock[i]->location.z);
-        glVertex3f(flock[i]->location.x, flock[i]->location.y-0.05f, flock[i]->location.z);
+        glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000+0.05f, flock[i]->location.z/1000);
+        glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000-0.05f, flock[i]->location.z/1000);
         glEnd();
         glBegin(GL_LINES);
-        glVertex3f(flock[i]->location.x, flock[i]->location.y, flock[i]->location.z+0.05f);
-        glVertex3f(flock[i]->location.x, flock[i]->location.y, flock[i]->location.z-0.05f);
+        glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000, flock[i]->location.z/1000+0.05f);
+        glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000, flock[i]->location.z/1000-0.05f);
         glEnd();
         i++;
     }

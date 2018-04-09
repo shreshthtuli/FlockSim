@@ -35,6 +35,11 @@ public:
     Pvector operator +(Pvector v){
         return Pvector(x+v.x,y+v.y,z+v.z);
     }
+    static Pvector Rnd_Vector(float size){
+        Pvector rndvec(rand()*1.0,rand()*1.0,rand()*1.0);
+        rndvec.normalize();
+        return rndvec*size;
+    }
     Pvector operator +(float f){
         return Pvector(x+f,y+f,z+f);
     }

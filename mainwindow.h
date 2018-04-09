@@ -26,10 +26,12 @@ public:
 
 private slots:
     void on_AddBoid_released();
-
+protected:
+    int timerId;
 private:
     Ui::MainWindow *ui;
     Flock *flock;
+    void timerEvent(QTimerEvent *event);
 };
 
 #endif // MAINWINDOW_H

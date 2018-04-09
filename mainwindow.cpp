@@ -15,9 +15,10 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow)    
 {
     ui->setupUi(this);
+    timerId=startTimer(100);
     //flock = new Flock();
 }
 
@@ -30,4 +31,8 @@ void MainWindow::on_AddBoid_released()
 {
     ui->glwidget->addBoid(ui->xloc->value(), ui->yloc->value(), ui->zloc->value(), ui->strength->value(), ui->adventorous->value(), ui->sightedness->value(), ui->fova->value(), ui->fovb->value());
 
+}
+void MainWindow::timerEvent(QTimerEvent *event){
+    ui->glwidget->flocking();
+    ui->glwidget->updateGL();
 }

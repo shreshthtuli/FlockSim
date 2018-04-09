@@ -12,6 +12,7 @@
 #define drag_coeff 0.8
 #define lift_coeff 1.5
 #define max_acc 1.0
+#define noise 2.0
 
 #ifndef BOID_H_
 #define BOID_H_
@@ -68,7 +69,8 @@ public:
         mass=0.075;
         fov=fova*M_PI/fovb;
         density=730.0;
-
+        velocity=Pvector(rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX);
+        acceleration=Pvector(rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX);
     }
     //void applyForce(Pvector force);
     ///Internal forces felt by the birds. These are combined into one function to avoid having to loop over all the birds multiple times.
@@ -99,12 +101,12 @@ public:
             i++;
         }
 
-        //the forces need to be normalised and added. In this case, we choose not to normalise separation
-        return net_sep+(net_att+net_coh)/net_weight;
+        //the forces need to be normalised and added. In this case, we choose not to normalise separation. Also, we add a random noise
+        return Pvector::Rnd_Vector(noise)+((net_weight>0)?net_sep+(net_att+net_coh)/net_weight:Pvector(0,0,0));
     }
     ///Positional forces felt by the bird. While it is realistic that the birds would not want to touch the ground, we need hypotheticl boundaries on all sides. This is mostly a computational restriction. This is modelled as a maximally flat filter
     Pvector Positional(){
-        return (location/pow(1.5*location.abs()/soft_max_pos,21))*pos_push;
+        return (location.abs()/soft_max_pos>0.2)?(location/pow(1.5*location.abs()/soft_max_pos,21))*pos_push:Pvector(0,0,0);
     }
 
     //Functions involving SFML and visualisation linking
