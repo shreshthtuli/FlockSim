@@ -72,9 +72,10 @@ public:
         z/=abs();
     }
     void logistic_limit(float max){
-        x=tanh(x/max)*max;
-        y=tanh(y/max)*max;
-        z=tanh(z/max)*max;
+        float net=(tanh(abs()/(max*1.732))*max*1.732)/abs();
+        x*=net;
+        y*=net;
+        z*=net;
     }
     //Calculating Functions
     static float distance(Pvector v1, Pvector v2){
