@@ -253,5 +253,21 @@ void Flock::draw()
     }
 
 }
-
+string Flock::get_params(){
+    string s("");
+    s.append("Total of ");
+    s.append(to_string(flock.size()));
+    s.append(" starlings spending an average power of ");
+    float max_power=0;
+    float total_power=0;
+    for(Boid* i:flock){
+        total_power+=i->power;
+        if(i->power>max_power)max_power=i->power;
+    }
+    s.append(to_string(total_power/flock.size()));
+    s.append("(Maximum ");
+    s.append(to_string(max_power));
+    s.append(")");
+    return s;
+}
 

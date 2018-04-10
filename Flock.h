@@ -2,7 +2,7 @@
 #include <vector>
 #include "Boid.h"
 #include <QGLWidget>
-
+#include <string>
 #ifndef FLOCK_H_
 #define FLOCK_H_
 
@@ -27,6 +27,7 @@ public:
     void setYRotation(int angle);
     void setZRotation(int angle);
     void setzoom(int zoomval);
+    string get_params();
 
 public slots:
     void addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb);

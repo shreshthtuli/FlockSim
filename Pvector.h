@@ -1,6 +1,6 @@
 #include <iostream>
 #include <math.h>
-
+#include <time.h>
 using namespace std;
 
 #ifndef PVECTOR_H_
@@ -36,7 +36,8 @@ public:
         return Pvector(x+v.x,y+v.y,z+v.z);
     }
     static Pvector Rnd_Vector(float size){
-        Pvector rndvec(rand()*1.0,rand()*1.0,rand()*1.0);
+        srand(time(NULL));
+        Pvector rndvec(rand()*1.0-RAND_MAX/2,rand()*1.0-RAND_MAX/2,rand()*1.0-RAND_MAX/2);
         rndvec.normalize();
         return rndvec*size;
     }

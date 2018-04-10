@@ -2,8 +2,9 @@
 #include <vector>
 #include <stdlib.h>
 #include <iostream>
+#include <time.h>
 
-#define sep_fact -10000.0
+#define sep_fact -1000000.0
 #define att_fact 0.9
 #define coh_fact 0.01
 #define soft_max_pos 100.0
@@ -59,7 +60,7 @@ public:
     Pvector acceleration;
     Boid() {}
     Boid(float x, float y, float z, float Istrength, float adv, float sightedness, int fova, int fovb){
-        location=Pvector(x,y,z);
+        location=Pvector::Rnd_Vector(1000);
         power=0.0;
         energy=0.0;
         strength=Istrength;
@@ -69,7 +70,8 @@ public:
         mass=0.075;
         fov=fova*M_PI/fovb;
         density=730.0;
-        velocity=Pvector(rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX);
+        srand(time(NULL));
+        velocity=Pvector(rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX)*200;
         acceleration=Pvector(rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX,rand()*1.0/RAND_MAX);
     }
     //void applyForce(Pvector force);
@@ -100,9 +102,10 @@ public:
             }
             i++;
         }
-        net_coh=net_coh*(1000-adventurous)/1000.0;
+        net_coh=(net_coh*(1000-adventurous)+Pvector::Rnd_Vector(adventurous/20))/1000.0;
+        net_att=(net_att*(1000-adventurous)+Pvector::Rnd_Vector(adventurous/20))/1000.0;
         //the forces need to be normalised and added. In this case, we choose not to normalise separation. Also, we add a random noise
-        return Pvector::Rnd_Vector(noise)+((net_weight>0)?net_sep+(net_coh+net_att):Pvector(0,0,0));
+        return ((net_weight>0)?net_sep+(net_coh+net_att)/net_weight:Pvector(0,0,0));
     }
     ///Positional forces felt by the bird. While it is realistic that the birds would not want to touch the ground, we need hypotheticl boundaries on all sides. This is mostly a computational restriction. This is modelled as a maximally flat filter
     Pvector Positional(){
@@ -128,11 +131,12 @@ public:
         new_vel=new_vel+difference;
         acceleration=new_vel-velocity;
         velocity=velocity+acceleration;
-        power=velocity*(difference)*mass;
-        energy+=power;
-        auto new_loc=location+velocity/10;
+
+        auto new_loc=location+velocity;
         new_loc.logistic_limit(20*soft_max_pos);
-        velocity=(new_loc-location)*10;
+        velocity=(new_loc-location);
+        power=velocity*(difference)*mass;
+        energy+=power/10;
         location=new_loc;
     }
 };

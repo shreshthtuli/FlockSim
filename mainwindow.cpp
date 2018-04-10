@@ -36,4 +36,5 @@ void MainWindow::timerEvent(QTimerEvent *event){
     ui->glwidget->flocking();
     ui->glwidget->updateGL();
     ui->progressBar->setValue((ui->progressBar->value()+1)%100);
+    ui->label->setText(QString::fromStdString(ui->glwidget->get_params()));
 }
