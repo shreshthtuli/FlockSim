@@ -3,16 +3,16 @@
 #include <stdlib.h>
 #include <iostream>
 
-#define sep_fact -100000000.0
-#define att_fact 0.1
+#define sep_fact -10000.0
+#define att_fact 0.9
 #define coh_fact 0.01
 #define soft_max_pos 100.0
 #define pos_push -1000.0
 #define density_of_air 1.225
 #define drag_coeff 0.8
 #define lift_coeff 1.5
-#define max_acc 50.0
-#define noise 20.0
+#define max_acc 10.0
+#define noise 10.0
 
 #ifndef BOID_H_
 #define BOID_H_
