@@ -3,10 +3,13 @@
 #include <stdlib.h>
 #include <iostream>
 #include <time.h>
+#include <QtGlobal>
+#include <QString>
+
 
 #define sep_fact -1000000.0
 #define att_fact 1.0
-#define coh_fact 0.02
+#define coh_fact 0.01
 #define soft_max_pos 100.0
 #define pos_push -1000.0
 #define density_of_air 1.225
@@ -88,17 +91,22 @@ public:
             if(i!=self && Pvector::angle(velocity,(Boids[i]->location)-location)){
                 b=Boids[i];
                 distance=Pvector::distance(b->location, location);
-                view_factor=exp(-sightedness*distance*100);
+                view_factor=exp(-sightedness*distance*distance);
                 net_weight+=view_factor;
                 //separation
-                net_sep= net_sep+(location-b->location)*view_factor*sep_fact/(distance*distance*distance);
+                qInfo(QString("%1").arg(distance).toLatin1());
+                if(distance < 100){
+                    net_sep= net_sep-(location-b->location)*view_factor*sep_fact*100000/(distance*distance*distance*distance);
+                }
 
                 //alignment
-                net_att= net_att+b->velocity*att_fact*view_factor;
+                net_att= net_att+b->velocity*att_fact*view_factor*1000;
 
                 //cohesion
                 //this force acts opposite to separation. therefore, it is important to make it rise slower, so that separation dominates at lesser distances while cohesion dominates at higher distances
-                net_coh= net_coh+(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance);
+                if(distance > 2){
+                    net_coh= net_coh-(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance)*100000;
+                }
             }
             i++;
         }
@@ -116,11 +124,12 @@ public:
     //Pvector seek(Pvector v);
     void run(vector <Boid*> v, int self){
         //Model the external forces
-        Pvector gravity(0,-9.81,0);
-        gravity= gravity*(density-density_of_air)/density;      //correct for buoyancy
-        Pvector drag=(velocity/velocity.abs())*((velocity*velocity)*(-0.5)*density_of_air*drag_coeff*csa/mass);
-        Pvector Lift(0,(velocity.x*velocity.x+velocity.y*velocity.y)*density_of_air*0.5*wing_area*lift_coeff,0);
-        Pvector acc_net=gravity+drag+Lift;
+
+        //Pvector gravity(0,-9.81,0);
+        //gravity= gravity*(density-density_of_air)/density;      //correct for buoyancy
+        //Pvector drag=(velocity/velocity.abs())*((velocity*velocity)*(-0.5)*density_of_air*drag_coeff*csa/mass);
+        //Pvector Lift(0,(velocity.x*velocity.x+velocity.y*velocity.y)*density_of_air*0.5*wing_area*lift_coeff,0);
+        //Pvector acc_net=gravity+drag+Lift;
         Pvector new_vel=velocity+acceleration;
         Pvector desired_vel=Internal(v,self)+Positional();
         Pvector difference=desired_vel-new_vel;
