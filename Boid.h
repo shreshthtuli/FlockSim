@@ -10,7 +10,7 @@
 #define sep_fact -1000000.0
 #define att_fact 1.0
 #define coh_fact 0.01
-#define soft_max_pos 100.0
+#define soft_max_pos 200.0
 #define pos_push -1000.0
 #define density_of_air 1.225
 #define drag_coeff 0.8
