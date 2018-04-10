@@ -23,9 +23,19 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    bool sep;
+    bool align;
+    bool coh;
 
 private slots:
     void on_AddBoid_released();
+
+    void on_sep_stateChanged(int arg1);
+
+    void on_align_stateChanged(int arg1);
+
+    void on_coh_stateChanged(int arg1);
+
 protected:
     int timerId;
 private:

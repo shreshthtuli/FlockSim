@@ -259,27 +259,27 @@
        </spacer>
       </item>
       <item>
-       <widget class="QRadioButton" name="sep">
+       <widget class="QCheckBox" name="sep">
         <property name="text">
          <string>Separation</string>
         </property>
         <property name="checked">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="align">
+       <widget class="QCheckBox" name="align">
         <property name="text">
          <string>Alignment</string>
         </property>
         <property name="checked">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="coh">
+       <widget class="QCheckBox" name="coh">
         <property name="text">
          <string>Cohesion</string>
         </property>

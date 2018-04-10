@@ -255,7 +255,7 @@ void Flock::draw()
     Pvector dir_temp;
     while(i<flock.size()){
 
-        qInfo(QString("%1").arg(flock[i]->velocity.abs()).toLatin1());
+        //qInfo(QString("%1").arg(flock[i]->velocity.abs()).toLatin1());
 
         colourcode = flock[i]->velocity.abs();
 

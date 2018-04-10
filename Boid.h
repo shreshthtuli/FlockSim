@@ -103,16 +103,22 @@ public:
                 if(align){
                     net_att= net_att+b->velocity*att_fact*view_factor*1000;
                 }
+                else{
+                    net_att= net_att+Pvector::Rnd_Vector(500)*att_fact*view_factor*1000;
+                }
+
                 //cohesion
                 //this force acts opposite to separation. therefore, it is important to make it rise slower, so that separation dominates at lesser distances while cohesion dominates at higher distances
                 if(distance > 2 && coh){
-                    net_coh= net_coh-(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance)*100000;
+                    net_coh= net_coh-(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance)*10000000;
                 }
             }
             i++;
         }
-        net_coh=(net_coh*(1000-adventurous)+Pvector::Rnd_Vector(adventurous/20))/1000.0;
-        net_att=(net_att*(1000-adventurous)+Pvector::Rnd_Vector(adventurous/20))/1000.0;
+        if(coh)
+            net_coh=(net_coh*(1000-adventurous)+Pvector::Rnd_Vector(adventurous/20))/1000.0;
+        if(align)
+            net_att=(net_att*(1000-adventurous)+Pvector::Rnd_Vector(adventurous/20))/1000.0;
         //the forces need to be normalised and added. In this case, we choose not to normalise separation. Also, we add a random noise
         return ((net_weight>0)?net_sep+(net_coh+net_att)/net_weight:Pvector(0,0,0));
     }
