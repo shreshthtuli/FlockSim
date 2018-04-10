@@ -79,7 +79,7 @@ public:
     }
     //void applyForce(Pvector force);
     ///Internal forces felt by the birds. These are combined into one function to avoid having to loop over all the birds multiple times.
-    Pvector Internal(vector<Boid*> Boids, int self){
+    Pvector Internal(vector<Boid*> Boids, int self, bool sep, bool align, bool coh){
         int i=0;
         Boid *b;
         float distance, view_factor;
@@ -95,16 +95,17 @@ public:
                 net_weight+=view_factor;
                 //separation
                 //qInfo(QString("%1").arg(distance).toLatin1());
-                if(distance < 100){
+                if(distance < 100 && sep){
                     net_sep= net_sep-(location-b->location)*view_factor*sep_fact*100000/(distance*distance*distance*distance);
                 }
 
                 //alignment
-                net_att= net_att+b->velocity*att_fact*view_factor*1000;
-
+                if(align){
+                    net_att= net_att+b->velocity*att_fact*view_factor*1000;
+                }
                 //cohesion
                 //this force acts opposite to separation. therefore, it is important to make it rise slower, so that separation dominates at lesser distances while cohesion dominates at higher distances
-                if(distance > 2){
+                if(distance > 2 && coh){
                     net_coh= net_coh-(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance)*100000;
                 }
             }
@@ -122,7 +123,7 @@ public:
     }
 
     //Pvector seek(Pvector v);
-    void run(vector <Boid*> v, int self){
+    void run(vector <Boid*> v, int self, bool sep, bool align, bool coh){
         //Model the external forces
 
         //Pvector gravity(0,-9.81,0);
@@ -131,7 +132,7 @@ public:
         //Pvector Lift(0,(velocity.x*velocity.x+velocity.y*velocity.y)*density_of_air*0.5*wing_area*lift_coeff,0);
         //Pvector acc_net=gravity+drag+Lift;
         Pvector new_vel=velocity+acceleration;
-        Pvector desired_vel=Internal(v,self)+Positional();
+        Pvector desired_vel=Internal(v,self, sep, align, coh)+Positional();
         Pvector difference=desired_vel-new_vel;
         difference.logistic_limit(max_acc*strength);
         //Pvector pos=Positional();

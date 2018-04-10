@@ -41,10 +41,10 @@ void Flock::addBoid(float x, float y, float z, float strength, float adv, float 
 
 // Runs the run function for every boid in the flock checking against the flock
 // itself. Which in turn applies all the rules to the flock.
-void Flock::flocking() 
+void Flock::flocking(bool sep, bool align, bool coh)
 {
     for (int i = 0; i < flock.size(); i++)
-        flock[i]->run(flock,i);
+        flock[i]->run(flock,i, sep, align, coh);
 }
 
 QSize Flock::minimumSizeHint() const

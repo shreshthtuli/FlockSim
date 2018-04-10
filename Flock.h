@@ -22,7 +22,7 @@ public:
     int getSize();
     Boid getBoid(int i);
     // Mutator Functions
-    void flocking();
+    void flocking(bool sep, bool align, bool coh);
     void setXRotation(int angle);
     void setYRotation(int angle);
     void setZRotation(int angle);

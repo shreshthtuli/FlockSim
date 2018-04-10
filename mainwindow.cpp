@@ -33,7 +33,7 @@ void MainWindow::on_AddBoid_released()
 
 }
 void MainWindow::timerEvent(QTimerEvent *event){
-    ui->glwidget->flocking();
+    ui->glwidget->flocking(ui->sep->close(), ui->align->close(), ui->coh->close());
     ui->glwidget->updateGL();
     ui->progressBar->setValue((ui->progressBar->value()+1)%100);
     ui->label->setText(QString::fromStdString(ui->glwidget->get_params()));
