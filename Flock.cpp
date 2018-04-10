@@ -173,12 +173,60 @@ void Flock::mouseMoveEvent(QMouseEvent *event)
     lastPos = event->pos();
 }
 
+QVector3D Flock::perp(const QVector3D &v) {
+    qreal min = fabs(v.x());
+    QVector3D cardinalAxis(1, 0, 0);
+
+    if (fabs(v.y()) < min) {
+        min = fabs(v.y());
+        cardinalAxis = QVector3D(0, 1, 0);
+    }
+
+    if (fabs(v.z()) < min) {
+        cardinalAxis = QVector3D(0, 0, 1);
+    }
+
+    return QVector3D::crossProduct(v, cardinalAxis);
+}
+
+void Flock::drawCone(const QVector3D &d, const QVector3D &a,
+              const qreal h, const qreal rd, const int n) {
+    QVector3D c = a + (-d * h);
+    QVector3D e0 = perp(d);
+    QVector3D e1 = QVector3D::crossProduct(e0, d);
+    qreal angInc = (2 * 3.14159) / n  ;
+
+    // calculate points around directrix
+    QVector<QVector3D> pts;
+    for (int i = 0; i < n; ++i) {
+        qreal rad = angInc * i;
+        QVector3D p = c + (((e0 * cos(rad)) + (e1 * sin(rad))) * rd);
+        pts.push_back(p);
+    }
+
+    // draw cone top
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3f(a.x(), a.y(), a.z());
+    for (int i = 0; i < n; ++i) {
+        glVertex3f(pts[i].x(), pts[i].y(), pts[i].z());
+    }
+    glEnd();
+
+    // draw cone bottom
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3f(c.x(), c.y(), c.z());
+    for (int i = n-1; i >= 0; --i) {
+        glVertex3f(pts[i].x(), pts[i].y(), pts[i].z());
+    }
+    glEnd();
+}
+
 void Flock::draw()
 {
     //glClear();
     //Axes
 
-    glLineWidth(4);
+    glLineWidth(1);
 
     glBegin(GL_LINES);
         glColor3f( 1.0f, 0.0f, 0.0f );
@@ -204,55 +252,42 @@ void Flock::draw()
     //3D object
     glColor3f( 0.8f, 0.8f, 0.8f );
     int i=0;
-    Pvector dir;
+    Pvector dir_temp;
     while(i<flock.size()){
-//        dir=flock[i].velocity;
-//        dir.normalize();
-//        dir*=0.61237243569*tth_side;
+        dir_temp = flock[i]->velocity;
+        dir_temp.normalize();
 
-//        glBegin(GL_POLYGON); //
-//        glNormal3f(norm.x,norm.y,norm.z);
-//        glVertex3f(flock[i].location.x, flock[i].location.y, flock[i].location.z)
-//        glVertex3f(flock[i].location.x - flock[i].velocity.x/?? + ??, flock[i].location.y - flock[i].velocity.y/?? + ??, flock[i].location.z - flock[i].velocity.z/?? + ??)
-//        glVertex3f(flock[i].location.x - flock[i].velocity.x/?? + ??, flock[i].location.y - flock[i].velocity.y/?? + ??, flock[i].location.z - flock[i].velocity.z/?? + ??)
-//        glEnd();
-//        glBegin(GL_POLYGON);
-//        glNormal3f(norm.x,norm.y,norm.z);
-//        glVertex3f(flock[i].location.x, flock[i].location.y, flock[i].location.z)
-//        glVertex3f(flock[i].location.x - flock[i].velocity.x/?? + ??, flock[i].location.y - flock[i].velocity.y/?? + ??, flock[i].location.z - flock[i].velocity.z/?? + ??)
-//        glVertex3f(flock[i].location.x - flock[i].velocity.x/?? + ??, flock[i].location.y - flock[i].velocity.y/?? + ??, flock[i].location.z - flock[i].velocity.z/?? + ??)
-//        glEnd();
-//        glBegin(GL_POLYGON);
-//        glNormal3f(norm.x,norm.y,norm.z);
-//        glVertex3f(flock[i].location.x, flock[i].location.y, flock[i].location.z)
-//        glVertex3f(flock[i].location.x - flock[i].velocity.x/?? + ??, flock[i].location.y - flock[i].velocity.y/?? + ??, flock[i].location.z - flock[i].velocity.z/?? + ??)
-//        glVertex3f(flock[i].location.x - flock[i].velocity.x/?? + ??, flock[i].location.y - flock[i].velocity.y/?? + ??, flock[i].location.z - flock[i].velocity.z/?? + ??)
-//        glEnd();
-//        glBegin(GL_POLYGON);
-//        glNormal3f(norm.x,norm.y,norm.z);
-//        glVertex3f(flock[i].location.x - flock[i].velocity.x/?? + ??, flock[i].location.y - flock[i].velocity.y/?? + ??, flock[i].location.z - flock[i].velocity.z/?? + ??)
-//        glVertex3f(flock[i].location.x - flock[i].velocity.x/?? + ??, flock[i].location.y - flock[i].velocity.y/?? + ??, flock[i].location.z - flock[i].velocity.z/?? + ??)
-//        glVertex3f(flock[i].location.x - flock[i].velocity.x/?? + ??, flock[i].location.y - flock[i].velocity.y/?? + ??, flock[i].location.z - flock[i].velocity.z/?? + ??)
-//        glEnd();
+        QVector3D dir;
+        dir.setX(dir_temp.x);
+        dir.setY(dir_temp.y);
+        dir.setZ(dir_temp.z);
 
-        glColor3f(1.0, 1.0, 1.0);
-        glLineWidth(2.0);
-        glBegin(GL_LINES);
-        glVertex3f(flock[i]->location.x/1000+0.05f, flock[i]->location.y/1000, flock[i]->location.z/1000);
-        glVertex3f(flock[i]->location.x/1000-0.05f, flock[i]->location.y/1000, flock[i]->location.z/1000);
-        glEnd();
-        glBegin(GL_LINES);
-        glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000+0.05f, flock[i]->location.z/1000);
-        glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000-0.05f, flock[i]->location.z/1000);
-        glEnd();
-        glBegin(GL_LINES);
-        glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000, flock[i]->location.z/1000+0.05f);
-        glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000, flock[i]->location.z/1000-0.05f);
-        glEnd();
+        QVector3D loc;
+        loc.setX(flock[i]->location.x/1000);
+        loc.setY(flock[i]->location.y/1000);
+        loc.setZ(flock[i]->location.z/1000);
+
+        Flock::drawCone(dir, loc, 0.05, 0.025, 3);
+
+        //glColor3f(1.0, 1.0, 1.0);
+        //glLineWidth(2.0);
+        //glBegin(GL_LINES);
+        //glVertex3f(flock[i]->location.x/1000+0.05f, flock[i]->location.y/1000, flock[i]->location.z/1000);
+        //glVertex3f(flock[i]->location.x/1000-0.05f, flock[i]->location.y/1000, flock[i]->location.z/1000);
+        //glEnd();
+        //glBegin(GL_LINES);
+        //glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000+0.05f, flock[i]->location.z/1000);
+        //glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000-0.05f, flock[i]->location.z/1000);
+        //glEnd();
+        //glBegin(GL_LINES);
+        //glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000, flock[i]->location.z/1000+0.05f);
+        //glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000, flock[i]->location.z/1000-0.05f);
+        //glEnd();
         i++;
     }
 
 }
+
 string Flock::get_params(){
     string s("");
     s.append("Total of ");

@@ -27,6 +27,8 @@ public:
     void setYRotation(int angle);
     void setZRotation(int angle);
     void setzoom(int zoomval);
+    void drawCone(const QVector3D &d, const QVector3D &a, const qreal h, const qreal rd, const int n);
+    QVector3D perp(const QVector3D &v);
     string get_params();
 
 public slots:
