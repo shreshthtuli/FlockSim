@@ -94,7 +94,7 @@ public:
                 view_factor=exp(-sightedness*distance*distance);
                 net_weight+=view_factor;
                 //separation
-                qInfo(QString("%1").arg(distance).toLatin1());
+                //qInfo(QString("%1").arg(distance).toLatin1());
                 if(distance < 100){
                     net_sep= net_sep-(location-b->location)*view_factor*sep_fact*100000/(distance*distance*distance*distance);
                 }

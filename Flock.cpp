@@ -254,6 +254,27 @@ void Flock::draw()
     int i=0;
     Pvector dir_temp;
     while(i<flock.size()){
+
+        qInfo(QString("%1").arg(flock[i]->velocity.abs()).toLatin1());
+
+        colourcode = flock[i]->velocity.abs();
+
+        if(colourcode < 1)
+            glColor3ub(148, 0, 211);
+        else if(colourcode > 1 && colourcode < 3)
+            glColor3ub(75, 0, 130);
+        else if(colourcode > 3 && colourcode < 5)
+            glColor3ub(0, 0, 255);
+        else if(colourcode > 5 && colourcode < 7)
+            glColor3ub(0, 255, 0);
+        else if(colourcode > 7 && colourcode < 9)
+            glColor3ub(255, 255, 0);
+        else if(colourcode > 9 && colourcode < 11)
+            glColor3ub(255, 127, 0);
+        else
+            glColor3ub(255, 0, 0);
+
+
         dir_temp = flock[i]->velocity;
         dir_temp.normalize();
 

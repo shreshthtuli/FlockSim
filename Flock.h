@@ -55,6 +55,7 @@ private:
     QPoint lastPos;
     int xRot,yRot,zRot;
     float zoomfactor;
+    float colourcode;
 };
 
 #endif
