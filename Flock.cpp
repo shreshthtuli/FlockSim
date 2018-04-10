@@ -117,8 +117,8 @@ void Flock::initializeGL()
     glPolygonMode(GL_BACK, GL_FILL);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
-    static GLfloat lightPosition[4] = { 0, 0, 10, 1.0 };
-    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+    static GLfloat lightPosition[4] = { 1, 1, 1, 1 };
+    glLightfv(GL_LIGHT0, GL_AMBIENT, lightPosition);
 
 }
 
