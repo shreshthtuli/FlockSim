@@ -5,8 +5,8 @@
 #include <time.h>
 
 #define sep_fact -1000000.0
-#define att_fact 0.9
-#define coh_fact 0.01
+#define att_fact 1.0
+#define coh_fact 0.02
 #define soft_max_pos 100.0
 #define pos_push -1000.0
 #define density_of_air 1.225
@@ -88,7 +88,7 @@ public:
             if(i!=self && Pvector::angle(velocity,(Boids[i]->location)-location)){
                 b=Boids[i];
                 distance=Pvector::distance(b->location, location);
-                view_factor=exp(-sightedness*distance);
+                view_factor=exp(-sightedness*distance*100);
                 net_weight+=view_factor;
                 //separation
                 net_sep= net_sep+(location-b->location)*view_factor*sep_fact/(distance*distance*distance);
@@ -131,7 +131,7 @@ public:
         acceleration=new_vel-velocity;
         velocity=velocity+acceleration;
 
-        auto new_loc=location+velocity;
+        auto new_loc=location+(velocity*0.01);
         new_loc.logistic_limit(20*soft_max_pos);
         velocity=(new_loc-location);
         power=velocity*(difference)*mass;

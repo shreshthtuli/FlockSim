@@ -267,7 +267,7 @@ void Flock::draw()
         loc.setY(flock[i]->location.y/1000);
         loc.setZ(flock[i]->location.z/1000);
 
-        Flock::drawCone(dir, loc, 0.05, 0.025, 3);
+        Flock::drawCone(dir, loc, 0.05, 0.02, 3);
         i++;
     }
 

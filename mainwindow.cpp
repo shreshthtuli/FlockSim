@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)    
 {
     ui->setupUi(this);
-    timerId=startTimer(100);
+    timerId=startTimer(10);
     //flock = new Flock();
 }
 
