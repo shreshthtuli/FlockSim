@@ -1,14 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Flock.h"
-#include <QMessageBox>
-#include <QDebug>
-#include <QSlider>
-#include <QFileDialog>
-#include <QFile>
-#include <QString>
-#include <QScreen>
-#include <QDesktopWidget>
 #include <QKeyEvent>
 #include<algorithm>
 using namespace std;
@@ -18,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)    
 {
     ui->setupUi(this);
-    timerId=startTimer(10);
+    timerId=startTimer(20);
     //flock = new Flock();
 }
 

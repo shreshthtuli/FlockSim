@@ -147,7 +147,7 @@ public:
         acceleration=new_vel-velocity;
         velocity=velocity+acceleration;
 
-        auto new_loc=location+(velocity*0.01);
+        auto new_loc=location+(velocity*0.04);
         new_loc.logistic_limit(20*soft_max_pos);
         velocity=(new_loc-location);
         power=velocity*(difference)*mass;
