@@ -110,7 +110,7 @@ public:
                 //cohesion
                 //this force acts opposite to separation. therefore, it is important to make it rise slower, so that separation dominates at lesser distances while cohesion dominates at higher distances
                 if(distance > 2 && coh){
-                    net_coh= net_coh-(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance)*10000000;
+                    net_coh= net_coh-(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance)*100000;
                 }
             }
             i++;
