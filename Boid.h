@@ -113,7 +113,6 @@ public:
         return (f>5)?(location*(sqrt(f)-sqrt(5)))*pos_push:Pvector(0,0,0);
     }
 
-    //Functions involving SFML and visualisation linking
     //Pvector seek(Pvector v);
     void run(vector <Boid*> v, int self){
         //Model the external forces

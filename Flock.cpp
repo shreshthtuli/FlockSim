@@ -268,21 +268,6 @@ void Flock::draw()
         loc.setZ(flock[i]->location.z/1000);
 
         Flock::drawCone(dir, loc, 0.05, 0.025, 3);
-
-        //glColor3f(1.0, 1.0, 1.0);
-        //glLineWidth(2.0);
-        //glBegin(GL_LINES);
-        //glVertex3f(flock[i]->location.x/1000+0.05f, flock[i]->location.y/1000, flock[i]->location.z/1000);
-        //glVertex3f(flock[i]->location.x/1000-0.05f, flock[i]->location.y/1000, flock[i]->location.z/1000);
-        //glEnd();
-        //glBegin(GL_LINES);
-        //glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000+0.05f, flock[i]->location.z/1000);
-        //glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000-0.05f, flock[i]->location.z/1000);
-        //glEnd();
-        //glBegin(GL_LINES);
-        //glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000, flock[i]->location.z/1000+0.05f);
-        //glVertex3f(flock[i]->location.x/1000, flock[i]->location.y/1000, flock[i]->location.z/1000-0.05f);
-        //glEnd();
         i++;
     }
 
