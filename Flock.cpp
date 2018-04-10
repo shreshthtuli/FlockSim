@@ -267,9 +267,9 @@ void Flock::draw()
             glColor3ub(0, 0, 255);
         else if(colourcode > 4.5 && colourcode < 6)
             glColor3ub(0, 255, 0);
-        else if(colourcode > 6 && colourcode < 8)
+        else if(colourcode > 6 && colourcode < 7.5)
             glColor3ub(255, 255, 0);
-        else if(colourcode > 8 && colourcode < 10)
+        else if(colourcode > 7.5 && colourcode < 9)
             glColor3ub(255, 127, 0);
         else
             glColor3ub(255, 0, 0);
