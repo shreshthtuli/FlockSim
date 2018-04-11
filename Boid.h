@@ -104,7 +104,7 @@ public:
                     net_att= net_att+b->velocity*att_fact*view_factor*1000;
                 }
                 else{
-                    net_att= net_att+Pvector::Rnd_Vector(500)*att_fact*view_factor*1000;
+                    net_att= net_att+Pvector::Rnd_Vector(500)*att_fact*view_factor*500;
                 }
 
                 //cohesion

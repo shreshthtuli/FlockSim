@@ -36,7 +36,7 @@ public:
         return Pvector(x+v.x,y+v.y,z+v.z);
     }
     static Pvector Rnd_Vector(float size){
-        srand(time(NULL));
+        //srand(time(NULL));
         Pvector rndvec(rand()*1.0-RAND_MAX/2,rand()*1.0-RAND_MAX/2,rand()*1.0-RAND_MAX/2);
         rndvec.normalize();
         return rndvec*size;
