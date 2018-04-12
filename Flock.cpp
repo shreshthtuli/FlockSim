@@ -294,21 +294,55 @@ void Flock::draw()
 
 }
 
-string Flock::get_params(){
-    string s("");
-    s.append("Total of ");
-    s.append(to_string(flock.size()));
-    s.append(" starlings spending an average power of \n");
-    float max_power=0;
-    float total_power=0;
+void Flock::set_params(){
+    max_speed=0;
+    total_speed=0;
+    maxacc=0;
+    total_acc=0;
+    max_power=0;
+    total_power=0;
+    max_energy=0;
+    total_energy=0;
     for(Boid* i:flock){
+        tempv = i->real_velocity;
+        total_speed+=tempv;
+        if(tempv>max_speed)max_speed=tempv;
+        tempa = i->real_acceleration;
+        total_acc+=tempa;
+        if(tempa>maxacc)maxacc=tempa;
         total_power+=i->power;
         if(i->power>max_power)max_power=i->power;
+        total_energy+=i->energy;
+        if(i->energy>max_energy)max_energy=i->energy;
     }
-    s.append(to_string(total_power/flock.size()));
-    s.append("\n(Maximum ");
-    s.append(to_string(max_power));
-    s.append(")");
-    return s;
+}
+
+void Flock::reset_energy(){
+    for(Boid* i:flock){
+        i->energy = 0.0;
+    }
+}
+
+QString Flock::get_params(int n){
+    if (n==0)
+        return QString::number(total_speed/flock.size());
+    else if (n==1)
+        return QString::number(max_speed);
+    else if (n==2)
+        return QString::number(total_acc/flock.size());
+    else if (n==3)
+        return QString::number(maxacc);
+    else if (n==4)
+        return QString::number(total_power/flock.size());
+    else if (n==5)
+        return QString::number(max_power);
+    else if (n==6)
+        return QString::number(total_energy);
+    else if (n==7)
+        return QString::number(max_energy);
+    else if (n==8)
+        return QString::number(total_energy/(15.7168*flock.size()));  ///376 Cal per 100g cereal and 4.18 J per 1 Cal
+    else if (n==9)
+        return QString::number(max_energy/(15.7168));
 }
 

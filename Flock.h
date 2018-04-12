@@ -2,7 +2,7 @@
 #include <vector>
 #include "Boid.h"
 #include <QGLWidget>
-#include <string>
+#include <QString>
 #ifndef FLOCK_H_
 #define FLOCK_H_
 
@@ -29,7 +29,9 @@ public:
     void setzoom(int zoomval);
     void drawCone(const QVector3D &d, const QVector3D &a, const qreal h, const qreal rd, const int n);
     QVector3D perp(const QVector3D &v);
-    string get_params();
+    void set_params();
+    QString get_params(int n);
+    void reset_energy();
 
 public slots:
     void addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb);
@@ -56,6 +58,16 @@ private:
     int xRot,yRot,zRot;
     float zoomfactor;
     float colourcode;
+    float max_speed=0;
+    float total_speed=0;
+    float maxacc=0;
+    float total_acc=0;
+    float max_power=0;
+    float total_power=0;
+    float max_energy=0;
+    float total_energy=0;
+    float tempv;
+    float tempa;
 };
 
 #endif

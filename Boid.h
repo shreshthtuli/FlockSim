@@ -61,6 +61,8 @@ public:
     Pvector location;
     Pvector velocity;
     Pvector acceleration;
+    float real_velocity;
+    float real_acceleration;
     Boid() {}
     Boid(float x, float y, float z, float Istrength, float adv, float sightedness, int fova, int fovb){
         location=Pvector::Rnd_Vector(1000);
@@ -150,9 +152,14 @@ public:
         auto new_loc=location+(velocity*0.04);
         new_loc.logistic_limit(20*soft_max_pos);
         velocity=(new_loc-location);
-        power=velocity*(difference)*mass;
-        energy+=power/10;
         location=new_loc;
+
+        power=fabs(velocity*(difference)*mass*0.1);
+        energy+=power/10;
+        real_velocity=velocity.abs()*0.3;
+        real_acceleration=acceleration.abs()*0.3;
+
+
     }
 };
 

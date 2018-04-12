@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QWidget>
 #include "Flock.h"
+#include <QTime>
 
 namespace Ui {
 class MainWindow;
@@ -36,12 +37,19 @@ private slots:
 
     void on_coh_stateChanged(int arg1);
 
+    void on_reset_timer_clicked();
+
 protected:
     int timerId;
 private:
     Ui::MainWindow *ui;
     Flock *flock;
     void timerEvent(QTimerEvent *event);
+    QTime n;
+    int elapsed;
+    int ms;
+    int sec;
+    int min;
 };
 
 #endif // MAINWINDOW_H
