@@ -27,8 +27,7 @@ void MainWindow::on_AddBoid_released()
         n.start();
 }
 void MainWindow::timerEvent(QTimerEvent *event){
-    ui->glwidget->set_params();
-    ui->glwidget->flocking(sep, align, coh);
+    ui->glwidget->flocking(sep, align, coh, random);
     ui->glwidget->updateGL();
     ui->progressBar->setValue((ui->progressBar->value()+1)%100);
     elapsed = n.elapsed();
@@ -36,16 +35,22 @@ void MainWindow::timerEvent(QTimerEvent *event){
     sec = elapsed/1000 - (min * 60);
     ms = elapsed - (sec * 1000) - (min * 60000);
     ui->label->setText(QString("Timestamp: ").append(QString::number(min).append(" min ").append(QString::number(sec)).append(" s ").append(QString::number(ms))).append(QString(" ms\nTotal of ")).append(QString::number(ui->glwidget->getSize())).append(" starlings with "));
-    ui->avgspeed->setText(ui->glwidget->get_params(0));
-    ui->maxspeed->setText(ui->glwidget->get_params(1));
-    ui->avgacc->setText(ui->glwidget->get_params(2));
-    ui->maxacc->setText(ui->glwidget->get_params(3));
-    ui->avgpow->setText(ui->glwidget->get_params(4));
-    ui->maxpow->setText(ui->glwidget->get_params(5));
-    ui->totenergy->setText(ui->glwidget->get_params(6));
-    ui->maxenergy->setText(ui->glwidget->get_params(7));
-    ui->avgmass->setText(ui->glwidget->get_params(8));
-    ui->maxmass->setText(ui->glwidget->get_params(9));
+    if(counter>=25){
+        ui->glwidget->set_params();
+        ui->avgspeed->setText(ui->glwidget->get_params(0));
+        ui->maxspeed->setText(ui->glwidget->get_params(1));
+        ui->avgacc->setText(ui->glwidget->get_params(2));
+        ui->maxacc->setText(ui->glwidget->get_params(3));
+        ui->avgpow->setText(ui->glwidget->get_params(4));
+        ui->maxpow->setText(ui->glwidget->get_params(5));
+        ui->totenergy->setText(ui->glwidget->get_params(6));
+        ui->maxenergy->setText(ui->glwidget->get_params(7));
+        ui->avgmass->setText(ui->glwidget->get_params(8));
+        ui->maxmass->setText(ui->glwidget->get_params(9));
+        counter = 0;
+    }
+    counter++;
+
 }
 
 void MainWindow::on_sep_stateChanged(int arg1)
@@ -76,4 +81,12 @@ void MainWindow::on_reset_timer_clicked()
 {
     n.start();
     ui->glwidget->reset_energy();
+}
+
+void MainWindow::on_checkBox_stateChanged(int arg1)
+{
+    if(arg1 == 0)
+        random = false;
+    else
+        random = true;
 }

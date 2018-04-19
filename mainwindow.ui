@@ -490,6 +490,13 @@
        </spacer>
       </item>
       <item>
+       <widget class="QCheckBox" name="checkBox">
+        <property name="text">
+         <string>Random calculation</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="sep">
         <property name="text">
          <string>Separation</string>

@@ -17,6 +17,7 @@
 #define lift_coeff 1.5
 #define max_acc 10.0
 #define noise 10.0
+#define const_air 0.00
 
 #ifndef BOID_H_
 #define BOID_H_
@@ -138,11 +139,6 @@ public:
     void run(vector <Boid*> v, int self, bool sep, bool align, bool coh){
         //Model the external forces
 
-        //Pvector gravity(0,-9.81,0);
-        //gravity= gravity*(density-density_of_air)/density;      //correct for buoyancy
-        //Pvector drag=(velocity/velocity.abs())*((velocity*velocity)*(-0.5)*density_of_air*drag_coeff*csa/mass);
-        //Pvector Lift(0,(velocity.x*velocity.x+velocity.y*velocity.y)*density_of_air*0.5*wing_area*lift_coeff,0);
-        //Pvector acc_net=gravity+drag+Lift;
         Pvector new_vel=velocity+acceleration;
         Pvector desired_vel=Internal(v,self, sep, align, coh)+Positional();
         Pvector difference=desired_vel-new_vel;
@@ -164,6 +160,13 @@ public:
             energy+=power/10;
             real_velocity=velocity.abs()*0.3;
             real_acceleration=acceleration.abs()*0.3;
+
+            //gravity and lift calculations
+            Pvector gravity(0,-9.81,0);
+            gravity= gravity*(density-density_of_air)*const_air/density;      //correct for buoyancy
+            Pvector drag=(velocity/velocity.abs())*((velocity*velocity)*(-0.5*const_air)*density_of_air*drag_coeff*csa/mass);
+            Pvector Lift(0,(velocity.x*velocity.x+velocity.y*velocity.y)*const_air*density_of_air*0.5*wing_area*lift_coeff,0);
+            Pvector acc_net=(gravity+drag+Lift)*const_air;
             counter = 0;
         }
 

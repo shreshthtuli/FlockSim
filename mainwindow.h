@@ -27,6 +27,7 @@ public:
     bool sep;
     bool align;
     bool coh;
+    bool random;
 
 private slots:
     void on_AddBoid_released();
@@ -39,8 +40,11 @@ private slots:
 
     void on_reset_timer_clicked();
 
+    void on_checkBox_stateChanged(int arg1);
+
 protected:
     int timerId;
+    int counter = 0;
 private:
     Ui::MainWindow *ui;
     Flock *flock;

@@ -46,6 +46,7 @@ void Flock::addBoid(float x, float y, float z, float strength, float adv, float 
     flock.push_back(b);
 }
 
+//Functions for multithreading sequential
 void flocking0(Flock* f){
     for (int i = 0; i < f->flock.size(); i+=4)
         f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh);
@@ -63,22 +64,58 @@ void flocking3(Flock* f){
         f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh);
 }
 
+//Functions for multithreading random
+void flocking10(Flock* f){
+    for (int i = 0; i < f->flock.size(); i+=4)
+        f->flock[f->a[i]]->run(f->flock, i, f->sep, f->align, f->coh);
+}
+void flocking11(Flock* f){
+    for (int i = 1; i < f->flock.size(); i+=4)
+        f->flock[f->a[i]]->run(f->flock, i, f->sep, f->align, f->coh);
+}
+void flocking12(Flock* f){
+    for (int i = 2; i < f->flock.size(); i+=4)
+        f->flock[f->a[i]]->run(f->flock, i, f->sep, f->align, f->coh);
+}
+void flocking13(Flock* f){
+    for (int i = 3; i < f->flock.size(); i+=4)
+        f->flock[f->a[i]]->run(f->flock, i, f->sep, f->align, f->coh);
+}
+
+
 // Runs the run function for every boid in the flock checking against the flock
 // itself. Which in turn applies all the rules to the flock.
-void Flock::flocking(bool Isep, bool Ialign, bool Icoh)
+void Flock::flocking(bool Isep, bool Ialign, bool Icoh, bool Irandom)
 {
     sep = Isep;
     align = Ialign;
     coh = Icoh;
-    QFuture<void> t1 = QtConcurrent::run(flocking0, this);
-    QFuture<void> t2 = QtConcurrent::run(flocking1, this);
-    QFuture<void> t3 = QtConcurrent::run(flocking2, this);
-    QFuture<void> t4 = QtConcurrent::run(flocking3, this);
-
-    t1.waitForFinished();
-    t2.waitForFinished();
-    t3.waitForFinished();
-    t4.waitForFinished();
+    if(Irandom){
+        int n = this->getSize();
+        a = new int[n];
+        for(int i = 0; i < n; i++)
+            a[i] = i;
+        random_shuffle(&a[0], &a[n]);
+        QFuture<void> t1 = QtConcurrent::run(flocking10, this);
+        QFuture<void> t2 = QtConcurrent::run(flocking11, this);
+        QFuture<void> t3 = QtConcurrent::run(flocking12, this);
+        QFuture<void> t4 = QtConcurrent::run(flocking13, this);
+        t1.waitForFinished();
+        t2.waitForFinished();
+        t3.waitForFinished();
+        t4.waitForFinished();
+        delete[]a;
+    }
+    else{
+        QFuture<void> t1 = QtConcurrent::run(flocking0, this);
+        QFuture<void> t2 = QtConcurrent::run(flocking1, this);
+        QFuture<void> t3 = QtConcurrent::run(flocking2, this);
+        QFuture<void> t4 = QtConcurrent::run(flocking3, this);
+        t1.waitForFinished();
+        t2.waitForFinished();
+        t3.waitForFinished();
+        t4.waitForFinished();
+    }
 }
 
 

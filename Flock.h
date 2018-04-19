@@ -26,7 +26,7 @@ public:
     int getSize();
     Boid getBoid(int i);
     // Mutator Functions
-    void flocking(bool sep, bool align, bool coh);
+    void flocking(bool sep, bool align, bool coh, bool random);
     void setXRotation(int angle);
     void setYRotation(int angle);
     void setZRotation(int angle);
@@ -37,6 +37,7 @@ public:
     QString get_params(int n);
     void reset_energy();
     bool sep, align, coh;
+    int* a;
 
 public slots:
     void addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb);
