@@ -2,8 +2,15 @@
 #include "Flock.h"
 #include <QtWidgets>
 #include <QtOpenGL>
+#include <QCoreApplication>
 
+
+
+#ifndef QT_NO_CONCURRENT
 #define tth_side 0.1
+
+using namespace QtConcurrent;
+
 // =============================================== //
 // ======== Flock Functions from Flock.h ========= //
 // =============================================== //
@@ -39,13 +46,42 @@ void Flock::addBoid(float x, float y, float z, float strength, float adv, float 
     flock.push_back(b);
 }
 
+void flocking0(Flock* f){
+    for (int i = 0; i < f->flock.size(); i+=4)
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh);
+}
+void flocking1(Flock* f){
+    for (int i = 1; i < f->flock.size(); i+=4)
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh);
+}
+void flocking2(Flock* f){
+    for (int i = 2; i < f->flock.size(); i+=4)
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh);
+}
+void flocking3(Flock* f){
+    for (int i = 3; i < f->flock.size(); i+=4)
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh);
+}
+
 // Runs the run function for every boid in the flock checking against the flock
 // itself. Which in turn applies all the rules to the flock.
-void Flock::flocking(bool sep, bool align, bool coh)
+void Flock::flocking(bool Isep, bool Ialign, bool Icoh)
 {
-    for (int i = 0; i < flock.size(); i++)
-        flock[i]->run(flock,i, sep, align, coh);
+    sep = Isep;
+    align = Ialign;
+    coh = Icoh;
+    QFuture<void> t1 = QtConcurrent::run(flocking0, this);
+    QFuture<void> t2 = QtConcurrent::run(flocking1, this);
+    QFuture<void> t3 = QtConcurrent::run(flocking2, this);
+    QFuture<void> t4 = QtConcurrent::run(flocking3, this);
+
+    t1.waitForFinished();
+    t2.waitForFinished();
+    t3.waitForFinished();
+    t4.waitForFinished();
 }
+
+
 
 QSize Flock::minimumSizeHint() const
 {
@@ -259,7 +295,9 @@ void Flock::draw()
 
         colourcode = flock[i]->velocity.abs()/4;
 
-        if(colourcode < 1)
+        if(colourcode < 0.5)
+            glColor3b(0, 0, 0);
+        else if(colourcode < 1)
             glColor3ub(148, 0, 211);
         else if(colourcode > 1 && colourcode < 3)
             glColor3ub(75, 0, 130);
@@ -346,3 +384,4 @@ QString Flock::get_params(int n){
         return QString::number(max_energy/(15.7168));
 }
 
+ #endif

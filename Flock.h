@@ -3,6 +3,10 @@
 #include "Boid.h"
 #include <QGLWidget>
 #include <QString>
+#include <QApplication>
+#include <QThread>
+#include <QtConcurrent/qtconcurrentrun.h>
+
 #ifndef FLOCK_H_
 #define FLOCK_H_
 
@@ -32,6 +36,7 @@ public:
     void set_params();
     QString get_params(int n);
     void reset_energy();
+    bool sep, align, coh;
 
 public slots:
     void addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb);

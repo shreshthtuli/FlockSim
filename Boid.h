@@ -58,11 +58,11 @@ public:
     float fov;
     float wing_area;
     float power,energy;
+    float real_velocity, real_acceleration;
+    int counter;
     Pvector location;
     Pvector velocity;
     Pvector acceleration;
-    float real_velocity;
-    float real_acceleration;
     Boid() {}
     Boid(float x, float y, float z, float Istrength, float adv, float sightedness, int fova, int fovb){
         location=Pvector::Rnd_Vector(1000);
@@ -89,25 +89,25 @@ public:
         Pvector net_sep(0,0,0);
         Pvector net_att(0,0,0);
         Pvector net_coh(0,0,0);
-
-        while(i<Boids.size()){
+        int k = Boids.size();
+        while(i<k){
             if(i!=self && Pvector::angle(velocity,(Boids[i]->location)-location)){
                 b=Boids[i];
                 distance=Pvector::distance(b->location, location);
-                if(distance < 500)
-                    view_factor = 0.1;
-                else
-                    view_factor = 0.00001;
+                view_factor=exp(-sightedness*distance*distance);
                 net_weight+=view_factor;
                 //separation
                 //qInfo(QString("%1").arg(distance).toLatin1());
-                if(distance < 300 && sep){
-                    net_sep= net_sep-(location-b->location)*view_factor*sep_fact*1000000000000000000000/(distance*distance*distance);
+                if(distance < 100 && sep && distance > 50){
+                    net_sep= net_sep-(location-b->location)*view_factor*sep_fact*sep_fact*sep_fact*100000/(distance*distance*distance*distance);
                 }
+                //else if(distance < 50 && sep){
+                //    net_sep= net_sep-(location-b->location)*sep_fact*sep_fact*sep_fact*100000*k*k*k*k*k;
+                //}
 
                 //alignment
-                if(align && distance < 500){
-                    net_att= net_att+b->velocity*att_fact*view_factor*1000;
+                if(align && distance > 200){
+                    net_att= net_att+b->velocity*att_fact*view_factor*1000 +Pvector::Rnd_Vector(500)*att_fact*view_factor*150;
                 }
                 else{
                     net_att= net_att+Pvector::Rnd_Vector(500)*att_fact*view_factor*500;
@@ -115,7 +115,7 @@ public:
 
                 //cohesion
                 //this force acts opposite to separation. therefore, it is important to make it rise slower, so that separation dominates at lesser distances while cohesion dominates at higher distances
-                if(distance > 200 && coh){
+                if(distance > 2 && coh && distance < 800){
                     net_coh= net_coh-(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance)*100000;
                 }
             }
@@ -158,13 +158,17 @@ public:
         velocity=(new_loc-location);
         location=new_loc;
 
-        power=fabs(velocity*(difference)*mass*0.1);
-        energy+=power/10;
-        real_velocity=velocity.abs()*0.3;
-        real_acceleration=acceleration.abs()*0.3;
-
+        counter++;
+        if(counter>=50){
+            power=fabs(velocity*(difference)*mass*0.1);
+            energy+=power/10;
+            real_velocity=velocity.abs()*0.3;
+            real_acceleration=acceleration.abs()*0.3;
+            counter = 0;
+        }
 
     }
+
 };
 
 #endif
