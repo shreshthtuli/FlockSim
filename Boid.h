@@ -89,20 +89,24 @@ public:
         Pvector net_sep(0,0,0);
         Pvector net_att(0,0,0);
         Pvector net_coh(0,0,0);
+
         while(i<Boids.size()){
             if(i!=self && Pvector::angle(velocity,(Boids[i]->location)-location)){
                 b=Boids[i];
                 distance=Pvector::distance(b->location, location);
-                view_factor=exp(-sightedness*distance*distance);
+                if(distance < 500)
+                    view_factor = 0.1;
+                else
+                    view_factor = 0.00001;
                 net_weight+=view_factor;
                 //separation
                 //qInfo(QString("%1").arg(distance).toLatin1());
-                if(distance < 100 && sep){
-                    net_sep= net_sep-(location-b->location)*view_factor*sep_fact*100000/(distance*distance*distance*distance);
+                if(distance < 300 && sep){
+                    net_sep= net_sep-(location-b->location)*view_factor*sep_fact*1000000000000000000000/(distance*distance*distance);
                 }
 
                 //alignment
-                if(align){
+                if(align && distance < 500){
                     net_att= net_att+b->velocity*att_fact*view_factor*1000;
                 }
                 else{
@@ -111,7 +115,7 @@ public:
 
                 //cohesion
                 //this force acts opposite to separation. therefore, it is important to make it rise slower, so that separation dominates at lesser distances while cohesion dominates at higher distances
-                if(distance > 2 && coh){
+                if(distance > 200 && coh){
                     net_coh= net_coh-(location-b->location)*view_factor*coh_fact*view_factor/(distance*distance)*100000;
                 }
             }
