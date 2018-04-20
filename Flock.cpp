@@ -42,7 +42,7 @@ Boid Flock::getBoid(int i)
 
 void Flock::addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb)
 {
-    auto b = new Boid(x, y, z, strength, adv, sightedness, fova, fovb);
+    auto b = new Boid(x, y, z, strength, adv, sightedness, fova, fovb, random_loc);
     flock.push_back(b);
 }
 

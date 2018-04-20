@@ -98,3 +98,11 @@ void MainWindow::on_checkBox_2_stateChanged(int arg1)
     else
         ui->glwidget->colour = true;
 }
+
+void MainWindow::on_checkBox_3_stateChanged(int arg1)
+{
+    if(arg1 == 0)
+        ui->glwidget->random_loc = false;
+    else
+        ui->glwidget->random_loc = true;
+}

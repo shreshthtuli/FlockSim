@@ -112,6 +112,16 @@
          </layout>
         </item>
         <item>
+         <widget class="QCheckBox" name="checkBox_3">
+          <property name="text">
+           <string>Random location</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <widget class="QLabel" name="Strength">

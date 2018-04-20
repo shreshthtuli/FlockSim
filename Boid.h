@@ -65,8 +65,11 @@ public:
     Pvector velocity;
     Pvector acceleration;
     Boid() {}
-    Boid(float x, float y, float z, float Istrength, float adv, float sightedness, int fova, int fovb){
-        location=Pvector::Rnd_Vector(1000);
+    Boid(float x, float y, float z, float Istrength, float adv, float sightedness, int fova, int fovb, bool random_loc){
+        if(random_loc)
+            location=Pvector::Rnd_Vector(1000);
+        else
+            location=Pvector(x, y, z);
         power=0.0;
         energy=0.0;
         strength=Istrength;

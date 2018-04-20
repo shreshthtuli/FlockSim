@@ -40,6 +40,7 @@ public:
     int* a;
     bool colour = true;
     float colourcode;
+    bool random_loc = true;
 
 public slots:
     void addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb);
