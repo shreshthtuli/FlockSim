@@ -10,7 +10,7 @@
 #define sep_fact -1000000.0
 #define att_fact 1.0
 #define coh_fact 0.01
-#define soft_max_pos 200.0
+#define soft_max_pos 220.0
 #define pos_push -1000.0
 #define density_of_air 1.225
 #define drag_coeff 0.8
@@ -156,7 +156,7 @@ public:
 
         counter++;
         if(counter>=50){
-            power=fabs(velocity*(difference)*mass*0.1);
+            power=fabs(velocity*(difference)*mass*0.12);
             energy+=power/10;
             real_velocity=velocity.abs()*0.3;
             real_acceleration=acceleration.abs()*0.3;

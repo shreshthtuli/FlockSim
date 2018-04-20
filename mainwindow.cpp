@@ -90,3 +90,11 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
     else
         random = true;
 }
+
+void MainWindow::on_checkBox_2_stateChanged(int arg1)
+{
+    if(arg1 == 0)
+        ui->glwidget->colour = false;
+    else
+        ui->glwidget->colour = true;
+}

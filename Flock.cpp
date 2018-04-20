@@ -323,31 +323,40 @@ void Flock::draw()
     //Flock::flocking();
 
     //3D object
-    glColor3f( 0.8f, 0.8f, 0.8f );
     int i=0;
     Pvector dir_temp;
+
     while(i<flock.size()){
 
         //qInfo(QString("%1").arg(flock[i]->velocity.abs()).toLatin1());
 
         colourcode = flock[i]->velocity.abs()/4;
 
-        if(colourcode < 0.5)
-            glColor3b(0, 0, 0);
-        else if(colourcode < 1)
-            glColor3ub(148, 0, 211);
-        else if(colourcode > 1 && colourcode < 3)
-            glColor3ub(75, 0, 130);
-        else if(colourcode > 3 && colourcode < 4.5)
-            glColor3ub(0, 0, 255);
-        else if(colourcode > 4.5 && colourcode < 6)
-            glColor3ub(0, 255, 0);
-        else if(colourcode > 6 && colourcode < 7.5)
-            glColor3ub(255, 255, 0);
-        else if(colourcode > 7.5 && colourcode < 9)
-            glColor3ub(255, 127, 0);
-        else
-            glColor3ub(255, 0, 0);
+        if(colour){
+            if(colourcode < 0.5)
+                glColor3ub(0, 0, 0);
+            else if(colourcode < 1)
+                glColor3ub(148, 0, 211);
+            else if(colourcode > 1 && colourcode < 3)
+                glColor3ub(75, 0, 130);
+            else if(colourcode > 3 && colourcode < 4.5)
+                glColor3ub(0, 0, 255);
+            else if(colourcode > 4.5 && colourcode < 6)
+                glColor3ub(0, 255, 0);
+            else if(colourcode > 6 && colourcode < 7.5)
+                glColor3ub(255, 255, 0);
+            else if(colourcode > 7.5 && colourcode < 9)
+                glColor3ub(255, 127, 0);
+            else
+                glColor3ub(255, 0, 0);
+        }
+        else{
+            if(colourcode < 0.5)
+                glColor3ub(0, 0, 0);
+            else
+                glColor3ub(200,200,200);
+        }
+
 
 
         dir_temp = flock[i]->velocity;

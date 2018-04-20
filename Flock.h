@@ -38,6 +38,8 @@ public:
     void reset_energy();
     bool sep, align, coh;
     int* a;
+    bool colour = true;
+    float colourcode;
 
 public slots:
     void addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb);
@@ -63,7 +65,6 @@ private:
     QPoint lastPos;
     int xRot,yRot,zRot;
     float zoomfactor;
-    float colourcode;
     float max_speed=0;
     float total_speed=0;
     float maxacc=0;
