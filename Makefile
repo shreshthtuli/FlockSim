@@ -7,8 +7,6 @@ DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
 MKDIR         = mkdir -p
 COPY          = cp -f
-QINSTALL      = C:/Qt/Static591/5.9.1_Static/bin/qmake.exe -install qinstall
-QINSTALL_PROGRAM = C:/Qt/Static591/5.9.1_Static/bin/qmake.exe -install qinstall -exe
 MOVE          = mv -f
 SUBTARGETS    =  release
 
