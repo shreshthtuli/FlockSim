@@ -7,8 +7,9 @@ Team Members: Shreshth Tuli (2016CS10680), Sankalan Pal Chowdhury (2016CS10701)
 The package is supposed to have the following functionalities:
 
     We should be able to interactively add New Starlings to a Flock with variable attributes
-    Given a Flock, we zshould be able to simulate their movement vis-a-vis various Internal and External Forces
-    We should also be able to calculate the instantaneous power and force on each Starling, and check if these values are in a sane range
+    Given a Flock, we should be able to simulate their movement vis-a-vis various Internal
+    and External Forces.
+    We should also be able to calculate the instantaneous power and force on each Starling, and check if these values are in a sane         range to prove the correctness of our simulation
 ![Screenshot]( /screens/200_boids.PNG?raw=true "Simulation with 200 Boids")
 
 ## Structure
@@ -38,7 +39,7 @@ Following is the description of the directories:
     include : Contains all header files for the project
     screen : some screens showing different features
     src : source (C++, XML) files developed for the software
-    lib : contains standard header files not created by the owners of this repository 
+    lib : contains standard libraries of OpenGL and Qt for UI
 
 Qt and OpenGL
 
@@ -47,6 +48,8 @@ Compilation and execution instructions
 
 In the top directory run:
 
+```
 make
+```
 
 (In case this does not work, statically linked executable in Release directory can be used) 
