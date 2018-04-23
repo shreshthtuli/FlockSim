@@ -43,10 +43,11 @@ Following is the description of the directories:
     src : source (C++, XML) files developed for the software
     lib : contains standard libraries of OpenGL and Qt for UI
 
-Qt and OpenGL
+##Qt and OpenGL
 
 The Model has been developed using Qt and OpenGL libraries. These are not required to be installed, as the executable is statically linked and deployment ready. This is not a cross-platform software and is built to run on Windows.
-Compilation and execution instructions
+
+##Compilation and execution instructions
 
 In the top directory run:
 
