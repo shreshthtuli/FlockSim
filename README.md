@@ -15,8 +15,8 @@ The package is supposed to have the following functionalities:
 ![Screenshot]( /screens/200_boids.PNG?raw=true "Simulation with 200 Boids")
 
 ## Structure
-The package structure for the software package is as follows:
-Engineering Drawing Software
+The package structure for the software package is as follows:<br/>
+FlockSim <br/>
 |<br/>
 |-> bin<br/>
 |-> release<br/>
