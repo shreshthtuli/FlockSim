@@ -23,11 +23,11 @@ Engineering Drawing Software
 |-> screen<br/>
 |-> src<br/>
 |-> lib<br/>
-&nbsp; &nbsp;|-> conf<br/>
+&nbsp;&nbsp;|-> conf<br/>
   &nbsp;&nbsp;|-> features<br/>
-  &nbsp; &nbsp;|-> modules<br/>
+  &nbsp;&nbsp;|-> modules<br/>
   &nbsp;&nbsp;|-> Plugins<br/>
-  &nbsp; &nbsp;|-> Win32<br/>
+  &nbsp;&nbsp;|-> Win32<br/>
 
 Following is the description of the directories:
 
