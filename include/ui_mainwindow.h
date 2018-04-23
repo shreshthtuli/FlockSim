@@ -113,9 +113,11 @@ public:
     QCheckBox *sep;
     QCheckBox *align;
     QCheckBox *coh;
-    QProgressBar *progressBar;
-    QPushButton *reset_timer;
+    QSpinBox *spinBox;
+    QPushButton *pushButton;
     QPushButton *AddBoid;
+    QPushButton *reset_timer;
+    QProgressBar *progressBar;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -124,7 +126,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(800, 825);
+        MainWindow->resize(1920, 1000);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_8 = new QHBoxLayout(centralWidget);
@@ -539,6 +541,27 @@ public:
 
         verticalLayout_2->addWidget(coh);
 
+        spinBox = new QSpinBox(centralWidget);
+        spinBox->setObjectName(QStringLiteral("spinBox"));
+        spinBox->setMaximum(400);
+
+        verticalLayout_2->addWidget(spinBox);
+
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        verticalLayout_2->addWidget(pushButton);
+
+        AddBoid = new QPushButton(centralWidget);
+        AddBoid->setObjectName(QStringLiteral("AddBoid"));
+
+        verticalLayout_2->addWidget(AddBoid);
+
+        reset_timer = new QPushButton(centralWidget);
+        reset_timer->setObjectName(QStringLiteral("reset_timer"));
+
+        verticalLayout_2->addWidget(reset_timer);
+
         progressBar = new QProgressBar(centralWidget);
         progressBar->setObjectName(QStringLiteral("progressBar"));
         progressBar->setValue(24);
@@ -546,23 +569,13 @@ public:
 
         verticalLayout_2->addWidget(progressBar);
 
-        reset_timer = new QPushButton(centralWidget);
-        reset_timer->setObjectName(QStringLiteral("reset_timer"));
-
-        verticalLayout_2->addWidget(reset_timer);
-
-        AddBoid = new QPushButton(centralWidget);
-        AddBoid->setObjectName(QStringLiteral("AddBoid"));
-
-        verticalLayout_2->addWidget(AddBoid);
-
 
         horizontalLayout_8->addLayout(verticalLayout_2);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 800, 26));
+        menuBar->setGeometry(QRect(0, 0, 1920, 26));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -638,9 +651,10 @@ public:
         sep->setText(QApplication::translate("MainWindow", "Separation", Q_NULLPTR));
         align->setText(QApplication::translate("MainWindow", "Alignment", Q_NULLPTR));
         coh->setText(QApplication::translate("MainWindow", "Cohesion", Q_NULLPTR));
-        progressBar->setFormat(QString());
-        reset_timer->setText(QApplication::translate("MainWindow", "Reset timer", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainWindow", "Auto Add Boids", Q_NULLPTR));
         AddBoid->setText(QApplication::translate("MainWindow", "Add Boid", Q_NULLPTR));
+        reset_timer->setText(QApplication::translate("MainWindow", "Reset timer", Q_NULLPTR));
+        progressBar->setFormat(QString());
     } // retranslateUi
 
 };
