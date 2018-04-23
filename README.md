@@ -1,8 +1,8 @@
-##Starlings Murmuration Simulation Software
+# Starlings Murmuration Simulation Software
 
 This repository holds the mathematical model and source files of an Starlings Murmuration Simulation software as a part of COP290 Course at IIT Delhi.
 Team Members: Shreshth Tuli (2016CS10680), Sankalan Pal Chowdhury (2016CS10701)
-##Aim
+## Aim
 
 The package is supposed to have the following functionalities:
 
@@ -11,7 +11,7 @@ The package is supposed to have the following functionalities:
     We should also be able to calculate the instantaneous power and force on each Starling, and check if these values are in a sane range
 ![Screenshot]( /screens/200_boids.PNG?raw=true "Simulation with 200 Boids")
 
-##Structure
+## Structure
 The package structure for the software package is as follows:
 Engineering Drawing Software
 |<br/>
