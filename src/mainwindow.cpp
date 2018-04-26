@@ -91,13 +91,13 @@ void MainWindow::on_reset_timer_clicked()
     ui->glwidget->reset_energy();
 }
 
-void MainWindow::on_checkBox_stateChanged(int arg1)
-{
-    if(arg1 == 0)
-        random = false;
-    else
-        random = true;
-}
+//void MainWindow::on_checkBox_stateChanged(int arg1)
+//{
+//    if(arg1 == 0)
+//        random = false;
+//    else
+//        random = true;
+//}
 
 void MainWindow::on_checkBox_2_stateChanged(int arg1)
 {
@@ -118,4 +118,25 @@ void MainWindow::on_checkBox_3_stateChanged(int arg1)
 void MainWindow::on_pushButton_clicked()
 {
     boids = ui->spinBox->value();
+}
+
+void MainWindow::on_horizontalSlider_actionTriggered(int action){}
+
+void MainWindow::on_horizontalSlider_2_actionTriggered(int action){}
+
+void MainWindow::on_horizontalSlider_3_actionTriggered(int action){}
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+    ui->glwidget->windx = ui->horizontalSlider->value();
+}
+
+void MainWindow::on_horizontalSlider_2_valueChanged(int value)
+{
+    ui->glwidget->windy = ui->horizontalSlider_2->value();
+}
+
+void MainWindow::on_horizontalSlider_3_valueChanged(int value)
+{
+    ui->glwidget->windz = ui->horizontalSlider_3->value();
 }

@@ -41,6 +41,9 @@ public:
     bool colour = true;
     float colourcode;
     bool random_loc = true;
+    float windx=0;
+    float windy=0;
+    float windz=0;
 
 public slots:
     void addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb);

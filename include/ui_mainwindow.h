@@ -72,6 +72,19 @@ public:
     QSpinBox *fova;
     QLabel *fovlabel;
     QSpinBox *fovb;
+    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_5;
+    QSlider *horizontalSlider;
+    QLabel *label_11;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *label_22;
+    QSlider *horizontalSlider_2;
+    QLabel *label_25;
+    QHBoxLayout *horizontalLayout_12;
+    QLabel *label_27;
+    QSlider *horizontalSlider_3;
+    QLabel *label_28;
     QHBoxLayout *horizontalLayout_9;
     QLabel *label;
     QVBoxLayout *verticalLayout_3;
@@ -325,6 +338,78 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout_7);
+
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        label_5 = new QLabel(centralWidget);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        horizontalLayout_10->addWidget(label_5);
+
+        horizontalSlider = new QSlider(centralWidget);
+        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
+        horizontalSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_10->addWidget(horizontalSlider);
+
+        label_11 = new QLabel(centralWidget);
+        label_11->setObjectName(QStringLiteral("label_11"));
+
+        horizontalLayout_10->addWidget(label_11);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_10);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setSpacing(6);
+        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
+        label_22 = new QLabel(centralWidget);
+        label_22->setObjectName(QStringLiteral("label_22"));
+
+        horizontalLayout_11->addWidget(label_22);
+
+        horizontalSlider_2 = new QSlider(centralWidget);
+        horizontalSlider_2->setObjectName(QStringLiteral("horizontalSlider_2"));
+        horizontalSlider_2->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_11->addWidget(horizontalSlider_2);
+
+        label_25 = new QLabel(centralWidget);
+        label_25->setObjectName(QStringLiteral("label_25"));
+
+        horizontalLayout_11->addWidget(label_25);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_11);
+
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setSpacing(6);
+        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
+        label_27 = new QLabel(centralWidget);
+        label_27->setObjectName(QStringLiteral("label_27"));
+
+        horizontalLayout_12->addWidget(label_27);
+
+        horizontalSlider_3 = new QSlider(centralWidget);
+        horizontalSlider_3->setObjectName(QStringLiteral("horizontalSlider_3"));
+        horizontalSlider_3->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_12->addWidget(horizontalSlider_3);
+
+        label_28 = new QLabel(centralWidget);
+        label_28->setObjectName(QStringLiteral("label_28"));
+
+        horizontalLayout_12->addWidget(label_28);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_12);
+
+
+        verticalLayout->addLayout(verticalLayout_4);
 
 
         verticalLayout_2->addLayout(verticalLayout);
@@ -591,6 +676,9 @@ public:
         QObject::connect(xloc, SIGNAL(valueChanged(int)), xlabel, SLOT(setNum(int)));
         QObject::connect(zloc, SIGNAL(valueChanged(int)), zlabel, SLOT(setNum(int)));
         QObject::connect(yloc, SIGNAL(valueChanged(int)), ylabel, SLOT(setNum(int)));
+        QObject::connect(horizontalSlider_2, SIGNAL(valueChanged(int)), label_25, SLOT(setNum(int)));
+        QObject::connect(horizontalSlider_3, SIGNAL(valueChanged(int)), label_28, SLOT(setNum(int)));
+        QObject::connect(horizontalSlider, SIGNAL(valueChanged(int)), label_11, SLOT(setNum(int)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -614,8 +702,14 @@ public:
         sightlabel->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
         Fov->setText(QApplication::translate("MainWindow", "Field of view:", Q_NULLPTR));
         fovlabel->setText(QApplication::translate("MainWindow", "* PI/", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MainWindow", "Wind speed x:", Q_NULLPTR));
+        label_11->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        label_22->setText(QApplication::translate("MainWindow", "Wind speed y:", Q_NULLPTR));
+        label_25->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        label_27->setText(QApplication::translate("MainWindow", "Wind speed z:", Q_NULLPTR));
+        label_28->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
-        label_3->setText(QApplication::translate("MainWindow", "Avergae speed:", Q_NULLPTR));
+        label_3->setText(QApplication::translate("MainWindow", "Average speed:", Q_NULLPTR));
         avgspeed->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         label_7->setText(QApplication::translate("MainWindow", "m/s", Q_NULLPTR));
         label_9->setText(QApplication::translate("MainWindow", "Maximum speed:", Q_NULLPTR));

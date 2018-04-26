@@ -246,6 +246,85 @@
           </item>
          </layout>
         </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Wind speed x:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="horizontalSlider">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>0</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_11">
+            <item>
+             <widget class="QLabel" name="label_22">
+              <property name="text">
+               <string>Wind speed y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="horizontalSlider_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_25">
+              <property name="text">
+               <string>0</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_12">
+            <item>
+             <widget class="QLabel" name="label_27">
+              <property name="text">
+               <string>Wind speed z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="horizontalSlider_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_28">
+              <property name="text">
+               <string>0</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
        </layout>
       </item>
       <item>
@@ -268,7 +347,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="label_3">
             <property name="text">
-             <string>Avergae speed:</string>
+             <string>Average speed:</string>
             </property>
            </widget>
           </item>
@@ -629,12 +708,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>757</x>
-     <y>191</y>
+     <x>1877</x>
+     <y>218</y>
     </hint>
     <hint type="destinationlabel">
-     <x>774</x>
-     <y>179</y>
+     <x>1905</x>
+     <y>218</y>
     </hint>
    </hints>
   </connection>
@@ -645,12 +724,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>718</x>
-     <y>239</y>
+     <x>1891</x>
+     <y>280</y>
     </hint>
     <hint type="destinationlabel">
-     <x>783</x>
-     <y>241</y>
+     <x>1905</x>
+     <y>280</y>
     </hint>
    </hints>
   </connection>
@@ -661,12 +740,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>713</x>
-     <y>209</y>
+     <x>1884</x>
+     <y>249</y>
     </hint>
     <hint type="destinationlabel">
-     <x>780</x>
-     <y>211</y>
+     <x>1905</x>
+     <y>249</y>
     </hint>
    </hints>
   </connection>
@@ -677,12 +756,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>654</x>
-     <y>80</y>
+     <x>1891</x>
+     <y>98</y>
     </hint>
     <hint type="destinationlabel">
-     <x>781</x>
-     <y>89</y>
+     <x>1905</x>
+     <y>98</y>
     </hint>
    </hints>
   </connection>
@@ -693,12 +772,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>632</x>
-     <y>146</y>
+     <x>1891</x>
+     <y>160</y>
     </hint>
     <hint type="destinationlabel">
-     <x>783</x>
-     <y>144</y>
+     <x>1905</x>
+     <y>160</y>
     </hint>
    </hints>
   </connection>
@@ -709,12 +788,60 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>675</x>
-     <y>117</y>
+     <x>1891</x>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
-     <x>780</x>
-     <y>119</y>
+     <x>1905</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_25</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1864</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1903</x>
+     <y>346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_28</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1822</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1899</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_11</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1829</x>
+     <y>322</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1902</x>
+     <y>327</y>
     </hint>
    </hints>
   </connection>

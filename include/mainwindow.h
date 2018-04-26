@@ -40,13 +40,25 @@ private slots:
 
     void on_reset_timer_clicked();
 
-    void on_checkBox_stateChanged(int arg1);
+    //void on_checkBox_stateChanged(int arg1);
 
     void on_checkBox_2_stateChanged(int arg1);
 
     void on_checkBox_3_stateChanged(int arg1);
 
     void on_pushButton_clicked();
+
+    void on_horizontalSlider_actionTriggered(int action);
+
+    void on_horizontalSlider_2_actionTriggered(int action);
+
+    void on_horizontalSlider_3_actionTriggered(int action);
+
+    void on_horizontalSlider_valueChanged(int value);
+
+    void on_horizontalSlider_2_valueChanged(int value);
+
+    void on_horizontalSlider_3_valueChanged(int value);
 
 protected:
     int timerId;
