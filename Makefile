@@ -22,7 +22,7 @@ all: release-all debug-all  FORCE
 clean: release-clean debug-clean  FORCE
 distclean: release-distclean debug-distclean  FORCE
 	-$(DEL_FILE) Makefile
-	-$(DEL_FILE) "./flocksim_plugin_import.cpp" .qmake.stash
+	-$(DEL_FILE) "./src/flocksim_plugin_import.cpp" .qmake.stash
 
 check: first
 
