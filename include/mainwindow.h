@@ -60,6 +60,8 @@ private slots:
 
     void on_horizontalSlider_3_valueChanged(int value);
 
+    void on_checkBox_4_stateChanged(int arg1);
+
 protected:
     int timerId;
     int counter = 0;

@@ -122,6 +122,7 @@ public:
     QLabel *label_14;
     QSpacerItem *verticalSpacer;
     QCheckBox *checkBox_2;
+    QCheckBox *checkBox_4;
     QCheckBox *checkBox;
     QCheckBox *sep;
     QCheckBox *align;
@@ -139,7 +140,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1920, 1000);
+        MainWindow->resize(1920, 1038);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_8 = new QHBoxLayout(centralWidget);
@@ -603,6 +604,11 @@ public:
 
         verticalLayout_2->addWidget(checkBox_2);
 
+        checkBox_4 = new QCheckBox(centralWidget);
+        checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
+
+        verticalLayout_2->addWidget(checkBox_4);
+
         checkBox = new QCheckBox(centralWidget);
         checkBox->setObjectName(QStringLiteral("checkBox"));
 
@@ -741,6 +747,7 @@ public:
         label_20->setText(QApplication::translate("MainWindow", "g", Q_NULLPTR));
         label_14->setText(QApplication::translate("MainWindow", "where the average mass of the bird is 80g.", Q_NULLPTR));
         checkBox_2->setText(QApplication::translate("MainWindow", "Colour", Q_NULLPTR));
+        checkBox_4->setText(QApplication::translate("MainWindow", "Wind", Q_NULLPTR));
         checkBox->setText(QApplication::translate("MainWindow", "Random calculation", Q_NULLPTR));
         sep->setText(QApplication::translate("MainWindow", "Separation", Q_NULLPTR));
         align->setText(QApplication::translate("MainWindow", "Alignment", Q_NULLPTR));

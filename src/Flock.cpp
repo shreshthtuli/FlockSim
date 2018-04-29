@@ -49,37 +49,37 @@ void Flock::addBoid(float x, float y, float z, float strength, float adv, float 
 //Functions for multithreading sequential
 void flocking0(Flock* f){
     for (int i = 0; i < f->flock.size(); i+=4)
-        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz);
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz, f->check_wind);
 }
 void flocking1(Flock* f){
     for (int i = 1; i < f->flock.size(); i+=4)
-        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz);
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz, f->check_wind);
 }
 void flocking2(Flock* f){
     for (int i = 2; i < f->flock.size(); i+=4)
-        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz);
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz, f->check_wind);
 }
 void flocking3(Flock* f){
     for (int i = 3; i < f->flock.size(); i+=4)
-        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz);
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz, f->check_wind);
 }
 
 //Functions for multithreading random
 void flocking10(Flock* f){
     for (int i = 0; i < f->flock.size(); i+=4)
-        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz);
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz, f->check_wind);
 }
 void flocking11(Flock* f){
     for (int i = 1; i < f->flock.size(); i+=4)
-        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz);
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz, f->check_wind);
 }
 void flocking12(Flock* f){
     for (int i = 2; i < f->flock.size(); i+=4)
-        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz);
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz, f->check_wind);
 }
 void flocking13(Flock* f){
     for (int i = 3; i < f->flock.size(); i+=4)
-        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz);
+        f->flock[i]->run(f->flock, i, f->sep, f->align, f->coh, f->windx, f->windy, f->windz, f->check_wind);
 }
 
 

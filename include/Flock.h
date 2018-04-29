@@ -44,6 +44,7 @@ public:
     float windx=0;
     float windy=0;
     float windz=0;
+    bool check_wind = false;
 
 public slots:
     void addBoid(float x, float y, float z, float strength, float adv, float sightedness, int fova, int fovb);

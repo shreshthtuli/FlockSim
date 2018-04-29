@@ -140,3 +140,11 @@ void MainWindow::on_horizontalSlider_3_valueChanged(int value)
 {
     ui->glwidget->windz = ui->horizontalSlider_3->value();
 }
+
+void MainWindow::on_checkBox_4_stateChanged(int arg1)
+{
+    if(arg1 == 0)
+        ui->glwidget->check_wind = false;
+    else
+        ui->glwidget->check_wind = true;
+}

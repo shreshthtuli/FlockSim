@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[19];
-    char stringdata0[426];
+    QByteArrayData data[20];
+    char stringdata0[453];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -49,7 +49,8 @@ QT_MOC_LITERAL(14, 279, 37), // "on_horizontalSlider_3_actionT..."
 QT_MOC_LITERAL(15, 317, 32), // "on_horizontalSlider_valueChanged"
 QT_MOC_LITERAL(16, 350, 5), // "value"
 QT_MOC_LITERAL(17, 356, 34), // "on_horizontalSlider_2_valueCh..."
-QT_MOC_LITERAL(18, 391, 34) // "on_horizontalSlider_3_valueCh..."
+QT_MOC_LITERAL(18, 391, 34), // "on_horizontalSlider_3_valueCh..."
+QT_MOC_LITERAL(19, 426, 26) // "on_checkBox_4_stateChanged"
 
     },
     "MainWindow\0on_AddBoid_released\0\0"
@@ -63,7 +64,8 @@ QT_MOC_LITERAL(18, 391, 34) // "on_horizontalSlider_3_valueCh..."
     "on_horizontalSlider_3_actionTriggered\0"
     "on_horizontalSlider_valueChanged\0value\0"
     "on_horizontalSlider_2_valueChanged\0"
-    "on_horizontalSlider_3_valueChanged"
+    "on_horizontalSlider_3_valueChanged\0"
+    "on_checkBox_4_stateChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,7 +75,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -81,20 +83,21 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   84,    2, 0x08 /* Private */,
-       3,    1,   85,    2, 0x08 /* Private */,
-       5,    1,   88,    2, 0x08 /* Private */,
-       6,    1,   91,    2, 0x08 /* Private */,
-       7,    0,   94,    2, 0x08 /* Private */,
-       8,    1,   95,    2, 0x08 /* Private */,
-       9,    1,   98,    2, 0x08 /* Private */,
-      10,    0,  101,    2, 0x08 /* Private */,
-      11,    1,  102,    2, 0x08 /* Private */,
-      13,    1,  105,    2, 0x08 /* Private */,
-      14,    1,  108,    2, 0x08 /* Private */,
-      15,    1,  111,    2, 0x08 /* Private */,
-      17,    1,  114,    2, 0x08 /* Private */,
-      18,    1,  117,    2, 0x08 /* Private */,
+       1,    0,   89,    2, 0x08 /* Private */,
+       3,    1,   90,    2, 0x08 /* Private */,
+       5,    1,   93,    2, 0x08 /* Private */,
+       6,    1,   96,    2, 0x08 /* Private */,
+       7,    0,   99,    2, 0x08 /* Private */,
+       8,    1,  100,    2, 0x08 /* Private */,
+       9,    1,  103,    2, 0x08 /* Private */,
+      10,    0,  106,    2, 0x08 /* Private */,
+      11,    1,  107,    2, 0x08 /* Private */,
+      13,    1,  110,    2, 0x08 /* Private */,
+      14,    1,  113,    2, 0x08 /* Private */,
+      15,    1,  116,    2, 0x08 /* Private */,
+      17,    1,  119,    2, 0x08 /* Private */,
+      18,    1,  122,    2, 0x08 /* Private */,
+      19,    1,  125,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -111,6 +114,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Int,   16,
     QMetaType::Void, QMetaType::Int,   16,
     QMetaType::Void, QMetaType::Int,   16,
+    QMetaType::Void, QMetaType::Int,    4,
 
        0        // eod
 };
@@ -135,6 +139,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 11: _t->on_horizontalSlider_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 12: _t->on_horizontalSlider_2_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: _t->on_horizontalSlider_3_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->on_checkBox_4_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -165,13 +170,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }

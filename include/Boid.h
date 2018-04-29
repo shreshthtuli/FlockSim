@@ -140,13 +140,20 @@ public:
     }
 
     //Pvector seek(Pvector v);
-    void run(vector <Boid*> v, int self, bool sep, bool align, bool coh, int wind_x, int wind_y, int wind_z){
+    void run(vector <Boid*> v, int self, bool sep, bool align, bool coh, int wind_x, int wind_y, int wind_z, bool wind){
         //Model the external forces
 
         Pvector new_vel=velocity+acceleration;
-        Pvector wind(wind_x, wind_y, wind_z);
-        wind = wind * (reynolds/1042);
-        Pvector desired_vel=Internal(v,self, sep, align, coh)+Positional()+wind;
+        Pvector desired_vel;
+        if (wind){
+            Pvector wind(wind_x, wind_y, wind_z);
+            wind = wind * (reynolds/1042);
+            desired_vel=Internal(v,self, sep, align, coh)+Positional()+wind;
+        }
+        else {
+            desired_vel=Internal(v,self, sep, align, coh)+Positional();
+        }
+
         Pvector difference=desired_vel-new_vel;
         difference.logistic_limit(max_acc*strength);
         //Pvector pos=Positional();
